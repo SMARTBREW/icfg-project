@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f9fafb;
+  --foreground: #000000;
+  /* Logo-derived greens (leaf cluster + wordmark) */
+  --icfg-lime: #c4e830;
+  --icfg-leaf: #2f8f54;
+  --icfg-forest: #0d3d26;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: #f9fafb;
+  color: #000000;
+}
+
+/* Primary actions: 3-stop gradient (lime → leaf → forest) */
+.icfg-btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--icfg-lime) 0%,
+    var(--icfg-leaf) 48%,
+    var(--icfg-forest) 100%
+  );
+  color: #ffffff;
+  box-shadow: 0 12px 32px -10px rgba(13, 61, 38, 0.55);
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icfg-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 14px 36px -10px rgba(13, 61, 38, 0.6);
+}
+
+.icfg-btn-primary:focus-visible {
+  outline: 2px solid var(--icfg-leaf);
+  outline-offset: 3px;
+}
+
+.icfg-btn-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  filter: grayscale(0.15);
+}
+
+/* Slight saturation so leaf greens read clearly on the light header bar */
+.icfg-header-logo {
+  filter: saturate(1.15) contrast(1.03);
+}
+
+/*
+  Footer is black; the logo file uses a dark wordmark + green leaves.
+  A light “tile” keeps full color without CSS invert (which was washing out to white).
+*/
+.footer-logo-panel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: min(100%, 28rem);
+  border-radius: 1rem;
+  background: linear-gradient(165deg, #f4f4f5 0%, #e4e4e7 100%);
+  padding: 0.875rem 1.125rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 12px 40px -16px rgba(0, 0, 0, 0.45);
+}
+
+@media (min-width: 768px) {
+  .footer-logo-panel {
+    padding: 1rem 1.35rem;
+    border-radius: 1.125rem;
+  }
+}
+
+.light-container {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.5rem;
+  border: 1px solid rgb(229 231 235);
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  box-shadow: 0px 12px 40px -12px rgba(0, 0, 0, 0.06);
+}
+
+.light-container-bottom {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.5rem;
+  border: 1px solid rgb(229 231 235);
+  background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+  box-shadow: 0px 16px 48px -12px rgba(0, 0, 0, 0.06);
+}
+
+.folder {
+  border-radius: 0.75rem;
+  border: 1px solid rgb(229 231 235);
+  background: #ffffff;
+  box-shadow: 0px 8px 24px -8px rgba(0, 0, 0, 0.06);
+}
+
+.icfg-program-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.5rem;
+  border: 1px solid rgb(229 231 235);
+  background: linear-gradient(165deg, #ffffff 0%, #f9fafb 100%);
+  box-shadow: 0px 12px 32px -8px rgba(0, 0, 0, 0.06);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
