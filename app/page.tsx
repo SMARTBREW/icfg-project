@@ -5,33 +5,34 @@ import ContactForm from "@/components/contact-form";
 import FadeInSection from "@/components/fade-in-section";
 import Header from "@/components/header";
 import {
+  IconCapacityBuilding,
+  IconCommunityEmpowerment,
   IconLeaf,
-  IconLivelihood,
-  IconPressure,
-  IconRights,
-  IconSchool,
-  IconSprout,
-  IconUsers,
+  IconScale,
 } from "@/components/icfg-icons";
+import ImpactMetricCounter from "@/components/impact-metric-counter";
+import PartnersMarquee from "@/components/partners-marquee";
 import SectionHeading from "@/components/section-heading";
 import SiteFooter from "@/components/site-footer";
-import { instrumentSerif, SatoshiBold } from "@/constants";
+import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
 import {
   CASE_STORY,
-  GET_INVOLVED,
   HERO_IMAGE,
   IMPACT_METRICS,
   PARTNER_PLACEHOLDERS,
-  PROBLEM_CARDS,
-  PROGRAM_CARDS,
   STORY_IMAGE,
   TRUST_IMAGE_ALTS,
   TRUST_IMAGES,
   TRUST_POINTS,
+  VALUE_PILLARS,
 } from "@/constants/icfg";
 
-const PROBLEM_ICONS = [IconRights, IconPressure, IconLivelihood] as const;
-const PROGRAM_ICONS = [IconLeaf, IconUsers, IconSprout, IconSchool] as const;
+const PILLAR_ICONS = {
+  community: IconCommunityEmpowerment,
+  leaf: IconLeaf,
+  scale: IconScale,
+  capacity: IconCapacityBuilding,
+} as const;
 
 const sectionPad =
   "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
@@ -69,12 +70,12 @@ export default function Home() {
               Power belongs with people who live in the forest.
             </h1>
             <p className="mt-8 max-w-[38rem] font-['Inter'] text-[1.05rem] font-[400] leading-[1.85rem] tracking-[-0.03em] text-black md:text-[1.125rem]">
-              We walk alongside tribal communities in India—securing rights,
+              We walk alongside tribal communities in India securing rights,
               protecting ecosystems, and building livelihoods that keep forests
               standing.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link href="/#involved">
+              <Link href="/#contact">
                 <button
                   type="button"
                   className="icfg-btn-primary w-full rounded-2xl px-[2.75rem] py-[1.125rem] font-['Inter'] font-[500] tracking-[-0.02em] sm:w-auto"
@@ -82,43 +83,46 @@ export default function Home() {
                   Support the work
                 </button>
               </Link>
-              <Link href="/#work">
+              <Link href="/#impact">
                 <button
                   type="button"
                   className="w-full rounded-2xl border border-[color:var(--icfg-leaf)]/35 bg-white/95 px-[2.75rem] py-[1.125rem] font-['Inter'] font-[500] tracking-[-0.02em] text-black shadow-sm backdrop-blur-[2px] sm:w-auto"
                 >
-                  See what we do
+                  See our impact
                 </button>
               </Link>
             </div>
           </div>
         </FadeInSection>
 
-        <section className="w-full bg-gray-50 py-12 md:py-16">
+        <section id="values" className="w-full bg-gray-50 py-12 text-black md:py-16">
           <div className={sectionPad}>
-            <SectionHeading title="The challenge" />
-            <FadeInSection id="problem" className="mt-16 md:mt-20">
-              <p className="mx-auto max-w-[40rem] text-center font-['Inter'] text-[1.05rem] leading-[1.85rem] tracking-[-0.02em] text-gray-700">
-                Forests and people are woven together—yet rights remain fragile,
-                pressures mount, and futures feel uncertain without sustained
-                solidarity.
-              </p>
-              <div className="mt-14 grid gap-6 md:grid-cols-3">
-                {PROBLEM_CARDS.map((card, index) => {
-                  const Icon = PROBLEM_ICONS[index];
+            <SectionHeading title="Our values" />
+            <FadeInSection className="mt-14 md:mt-20">
+              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+                {VALUE_PILLARS.map((pillar) => {
+                  const Icon = PILLAR_ICONS[pillar.icon];
+                  const toneClass =
+                    pillar.iconTone === "gold"
+                      ? "text-[#b8973a]"
+                      : "text-[#6b2a32]";
                   return (
                     <article
-                      key={card.id}
-                      className="folder flex flex-col gap-5 rounded-3xl p-8"
+                      key={pillar.id}
+                      className="flex flex-col items-center gap-4 rounded-2xl bg-white px-5 py-8 text-center shadow-[0_14px_44px_-14px_rgba(0,0,0,0.22)] ring-1 ring-black/[0.06] md:px-6"
                     >
-                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--icfg-lime)]/15 text-[color:var(--icfg-forest)] ring-1 ring-[color:var(--icfg-leaf)]/25">
-                        <Icon className="h-6 w-6" />
+                      <span
+                        className={`inline-flex shrink-0 items-center justify-center ${toneClass}`}
+                      >
+                        <Icon className="h-9 w-9 md:h-10 md:w-10" />
                       </span>
-                      <h3 className="font-['Inter'] text-[1.25rem] font-[600] tracking-[-0.04em] text-black">
-                        {card.title}
+                      <h3
+                        className={`${playfairDisplay.className} text-[1.2rem] leading-snug text-black md:text-[1.35rem]`}
+                      >
+                        {pillar.title}
                       </h3>
-                      <p className="font-['Inter'] text-[0.98rem] leading-[1.75rem] tracking-[-0.01em] text-gray-700">
-                        {card.body}
+                      <p className="font-['Inter'] text-[0.92rem] leading-[1.65rem] tracking-[-0.01em] text-gray-700 md:text-[0.95rem]">
+                        {pillar.body}
                       </p>
                     </article>
                   );
@@ -130,63 +134,20 @@ export default function Home() {
 
         <section className="w-full bg-gray-100 py-12 md:py-16">
           <div className={sectionPad}>
-            <SectionHeading title="What we do" />
-            <FadeInSection id="work" className="mt-16 md:mt-20">
-              <div className="grid gap-6 md:grid-cols-2">
-                {PROGRAM_CARDS.map((card, index) => {
-                  const Icon = PROGRAM_ICONS[index];
-                  return (
-                    <article
-                      key={card.id}
-                      className="icfg-program-card relative overflow-hidden p-8 md:p-10"
-                    >
-                      <div className="relative z-10 flex flex-col gap-4">
-                        <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[color:var(--icfg-lime)]/15 text-[color:var(--icfg-forest)] ring-1 ring-[color:var(--icfg-leaf)]/25">
-                          <Icon className="h-5 w-5" />
-                        </span>
-                        <h3 className="font-['Inter'] text-[1.35rem] font-[600] tracking-[-0.05em] text-black">
-                          {card.title}
-                        </h3>
-                        <p className="font-['Inter'] text-[1rem] leading-[1.8rem] tracking-[-0.01em] text-gray-700">
-                          {card.body}
-                        </p>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </FadeInSection>
-          </div>
-        </section>
-
-        <section className="w-full bg-gray-50 py-12 md:py-16">
-          <div className={sectionPad}>
             <FadeInSection id="impact">
               <h2 className="text-center font-['Inter'] text-[0.85rem] font-[600] uppercase tracking-[0.28em] text-[color:var(--icfg-forest)]">
                 Impact at a glance
               </h2>
               <div className="mt-12 grid gap-10 md:grid-cols-3">
                 {IMPACT_METRICS.map((m) => (
-                  <div
-                    key={m.id}
-                    className="flex flex-col items-center text-center md:items-start md:text-left"
-                  >
-                    <p
-                      className={`${SatoshiBold.className} text-[3.25rem] leading-none tracking-[-0.06em] text-black md:text-[4.5rem]`}
-                    >
-                      {m.value}
-                    </p>
-                    <p className="mt-4 max-w-[14rem] font-['Inter'] text-[1.05rem] font-[500] leading-[1.5rem] tracking-[-0.02em] text-gray-700">
-                      {m.label}
-                    </p>
-                  </div>
+                  <ImpactMetricCounter key={m.id} metric={m} />
                 ))}
               </div>
             </FadeInSection>
           </div>
         </section>
 
-        <section className="w-full bg-gray-100 py-12 md:py-16">
+        <section className="w-full bg-gray-50 py-12 md:py-16">
           <div className={sectionPad}>
             <FadeInSection id="story">
               <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -232,44 +193,19 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="w-full bg-gray-50 py-12 md:py-16">
+        <section
+          id="partners"
+          className="w-full bg-gray-100 py-12 text-black md:py-16"
+        >
           <div className={sectionPad}>
-            <SectionHeading title="Get involved" />
-            <FadeInSection id="involved" className="mt-16 md:mt-20">
-              <div className="grid gap-6 md:grid-cols-3">
-                {GET_INVOLVED.map((item) => (
-                  <article
-                    key={item.id}
-                    className="folder flex flex-col justify-between rounded-3xl p-8"
-                  >
-                    <div>
-                      <h3 className="font-['Inter'] text-[1.35rem] font-[600] tracking-[-0.04em] text-black">
-                        {item.title}
-                      </h3>
-                      <p className="mt-4 font-['Inter'] text-[0.98rem] leading-[1.75rem] tracking-[-0.01em] text-gray-700">
-                        {item.body}
-                      </p>
-                    </div>
-                    <Link href={item.href} className="mt-8 block">
-                      <button
-                        type="button"
-                        className={`w-full rounded-2xl px-6 py-3 font-['Inter'] text-[0.95rem] font-[500] tracking-[-0.02em] ${
-                          item.variant === "primary"
-                            ? "icfg-btn-primary"
-                            : "border border-[color:var(--icfg-leaf)]/30 bg-gray-50 text-black"
-                        }`}
-                      >
-                        {item.cta}
-                      </button>
-                    </Link>
-                  </article>
-                ))}
-              </div>
+            <SectionHeading title="Our partners" />
+            <FadeInSection className="mt-14 md:mt-20">
+              <PartnersMarquee />
             </FadeInSection>
           </div>
         </section>
 
-        <section className="w-full bg-gray-100 py-12 md:py-16">
+        <section className="w-full bg-gray-50 py-12 md:py-16">
           <div className={sectionPad}>
             <FadeInSection id="trust">
               <h2 className="text-center font-['Inter'] text-[0.85rem] font-[600] uppercase tracking-[0.26em] text-[color:var(--icfg-forest)]">

@@ -78,6 +78,35 @@ body {
   }
 }
 
+@keyframes icfg-partners-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.icfg-partners-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 3.5rem;
+  animation: icfg-partners-marquee 48s linear infinite;
+}
+
+@media (min-width: 768px) {
+  .icfg-partners-marquee-track {
+    gap: 5.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icfg-partners-marquee-track {
+    animation: none;
+  }
+}
+
 .light-container {
   position: relative;
   isolation: isolate;

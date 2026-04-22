@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 
 import Providers from "@/components/providers";
-import { interBody, instrumentSerif, SatoshiBold } from "@/constants/fonts";
+import {
+  interBody,
+  instrumentSerif,
+  playfairDisplay,
+  SatoshiBold,
+} from "@/constants/fonts";
 
 import "./globals.css";
 
@@ -34,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${interBody.variable} ${instrumentSerif.variable} ${SatoshiBold.variable} h-full antialiased`}
+      className={`${interBody.variable} ${instrumentSerif.variable} ${playfairDisplay.variable} ${SatoshiBold.variable} h-full antialiased`}
     >
       <body
         className={`${interBody.className} flex min-h-full flex-col bg-gray-50 text-black`}

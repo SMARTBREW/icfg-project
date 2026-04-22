@@ -2,12 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FOOTER_LINKS = [
-  { href: "#problem", label: "The challenge" },
-  { href: "#work", label: "What we do" },
-  { href: "#impact", label: "Impact" },
-  { href: "#story", label: "Stories" },
-  { href: "#involved", label: "Get involved" },
-  { href: "#contact", label: "Contact" },
+  { href: "/about", label: "About us" },
+  { href: "/programmes", label: "Programmes" },
+  { href: "/#story", label: "Stories" },
+  { href: "/#contact", label: "Contact" },
+] as const;
+
+const LEGAL_LINKS = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms-of-use", label: "Terms of Use" },
+  { href: "/return-policy", label: "Return policy" },
+  {
+    href: "https://icfgindia.org/refund-cancellation/",
+    label: "Refund & cancellation",
+  },
 ] as const;
 
 export default function SiteFooter() {
@@ -38,7 +46,7 @@ export default function SiteFooter() {
 
           <div className="flex flex-col gap-4 lg:col-span-4 lg:col-start-6">
             <p className="font-['Inter'] text-[0.75rem] font-[600] uppercase tracking-[0.2em] text-gray-500">
-              On this page
+              Explore
             </p>
             <nav aria-label="Footer">
               <ul className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
@@ -67,14 +75,30 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="font-['Inter'] text-[0.8rem] tracking-[-0.01em] text-gray-500">
-            © {new Date().getFullYear()} Institute of Community Forest
-            Governance. All rights reserved.
-          </p>
-          <p className="font-['Inter'] text-[0.8rem] tracking-[-0.01em] text-gray-500">
-            Registered non-profit · India
-          </p>
+        <div className="flex flex-col gap-6 border-t border-white/10 pt-8">
+          <nav aria-label="Legal">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-['Inter'] text-[0.8rem] tracking-[-0.01em] text-gray-500 underline-offset-4 transition-colors hover:text-gray-300 hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <p className="font-['Inter'] text-[0.8rem] tracking-[-0.01em] text-gray-500">
+              © {new Date().getFullYear()} Institute of Community Forest
+              Governance. All rights reserved.
+            </p>
+            <p className="font-['Inter'] text-[0.8rem] tracking-[-0.01em] text-gray-500">
+              Registered non-profit · India
+            </p>
+          </div>
         </div>
       </div>
     </footer>

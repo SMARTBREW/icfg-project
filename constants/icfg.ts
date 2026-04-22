@@ -1,5 +1,8 @@
 export const HERO_IMAGE = "/hero/DSC06535-1.webp";
 
+/** Programmes / inner page hero (field & community). */
+export const PROGRAMMES_HERO_IMAGE = "/programms/DSC04758-1-1.webp";
+
 export const STORY_IMAGE =
   "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80";
 
@@ -15,51 +18,60 @@ export const TRUST_IMAGE_ALTS = [
   "Tall trees along a forest trail",
 ] as const;
 
-export const PROBLEM_CARDS = [
+/** Four pillars over the forest band (reference layout). */
+export const VALUE_PILLARS = [
   {
-    id: "rights",
-    title: "Unrecognised rights",
-    body: "Many communities still lack secure tenure and voice in decisions that shape their forests and futures.",
+    id: "empowerment",
+    title: "Community Empowerment",
+    body: "Fostering the active participation, leadership, and decision-making power of forest dwelling communities in all aspects of forest conservation and management.",
+    icon: "community" as const,
+    iconTone: "gold" as const,
   },
   {
-    id: "pressure",
-    title: "Growing pressure",
-    body: "Deforestation, climate stress, and competing land uses threaten ecosystems and rural livelihoods together.",
+    id: "stewardship",
+    title: "Environmental Stewardship",
+    body: "Promoting sustainable practices that prioritize the long-term health and resilience of forest ecosystems, including biodiversity conservation and climate change mitigation.",
+    icon: "leaf" as const,
+    iconTone: "burgundy" as const,
   },
   {
-    id: "livelihoods",
-    title: "Fragile livelihoods",
-    body: "Without sustained support, traditional knowledge and local economies struggle to adapt and thrive.",
-  },
-] as const;
-
-export const PROGRAM_CARDS = [
-  {
-    id: "fr",
-    title: "Forest rights support",
-    body: "Legal literacy, documentation, and community-led planning so rights on paper become rights in practice.",
+    id: "justice",
+    title: "Social Justice",
+    body: "Advocating for equitable access to and benefits from forest resources, ensuring the inclusion and representation of marginalized groups, and addressing socio-economic disparities.",
+    icon: "scale" as const,
+    iconTone: "gold" as const,
   },
   {
-    id: "women",
-    title: "Women’s leadership",
-    body: "Collectives, training, and safe spaces that elevate women as stewards and decision-makers.",
-  },
-  {
-    id: "livelihood",
-    title: "Sustainable livelihoods",
-    body: "Value chains that honour the forest—non-timber produce, ecotourism, and climate-smart enterprises.",
-  },
-  {
-    id: "youth",
-    title: "Youth programmes",
-    body: "Education, mentorship, and digital tools that connect young people to culture, science, and opportunity.",
+    id: "capacity",
+    title: "Capacity Building",
+    body: "Encouraging the exchange of traditional and scientific knowledge, providing education and training opportunities, and fostering skills development within forest communities.",
+    icon: "capacity" as const,
+    iconTone: "burgundy" as const,
   },
 ] as const;
 
 export const IMPACT_METRICS = [
-  { id: "v", value: "120+", label: "Villages engaged" },
-  { id: "p", value: "18k+", label: "People reached" },
-  { id: "f", value: "2.4L ha", label: "Forests under community focus" },
+  {
+    id: "v",
+    label: "Villages engaged",
+    endValue: 120,
+    decimals: 0,
+    suffix: "+",
+  },
+  {
+    id: "p",
+    label: "People reached",
+    endValue: 18,
+    decimals: 0,
+    suffix: "k+",
+  },
+  {
+    id: "f",
+    label: "Forests under community focus",
+    endValue: 2.4,
+    decimals: 1,
+    suffix: "L ha",
+  },
 ] as const;
 
 export const CASE_STORY = {
@@ -72,30 +84,27 @@ export const CASE_STORY = {
   attribution: "— Community facilitator & forest dweller",
 };
 
-export const GET_INVOLVED = [
+/** Logos in `public/partners` for the marquee section */
+export const PARTNER_LOGOS = [
   {
-    id: "donate",
-    title: "Donate",
-    body: "Fuel legal aid, travel for hearings, and community kitchens during long field days.",
-    href: "#contact",
-    cta: "Give today",
-    variant: "primary" as const,
+    src: "/partners/FES.webp",
+    alt: "Foundation for Ecological Security",
   },
   {
-    id: "volunteer",
-    title: "Volunteer",
-    body: "Share skills—research, design, language, or field documentation—with village teams.",
-    href: "#contact",
-    cta: "Offer time",
-    variant: "secondary" as const,
+    src: "/partners/azim-premji.webp",
+    alt: "Azim Premji Foundation",
   },
   {
-    id: "partner",
-    title: "Partner",
-    body: "Co-create programmes with institutions, donors, and ethical enterprises aligned with community consent.",
-    href: "#contact",
-    cta: "Start a conversation",
-    variant: "secondary" as const,
+    src: "/partners/duleep.webp",
+    alt: "Duleep Matthai Nature Conservation Trust",
+  },
+  {
+    src: "/partners/global-green-grants-1.webp",
+    alt: "Global Greengrants Fund",
+  },
+  {
+    src: "/partners/munda.webp",
+    alt: "Munda partner organisation",
   },
 ] as const;
 

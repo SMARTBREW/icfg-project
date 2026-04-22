@@ -2,11 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { href: "/#problem", label: "Challenge" },
-  { href: "/#work", label: "What we do" },
+  { href: "/about", label: "About us" },
+  { href: "/#values", label: "Our values" },
+  { href: "/programmes", label: "Programmes" },
   { href: "/#impact", label: "Impact" },
-  { href: "/#story", label: "Stories" },
-  { href: "/#involved", label: "Join us" },
   { href: "/#contact", label: "Contact" },
 ] as const;
 
@@ -42,7 +41,7 @@ export default function Header() {
           </ul>
         </nav>
         <Link
-          href="/#involved"
+          href="/#contact"
           className="icfg-btn-primary rounded-2xl px-5 py-2.5 font-['Inter'] text-[0.85rem] font-[500] md:hidden"
         >
           Support
