@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Header from "@/components/header";
+import ProgrammesCommitteesSection from "@/components/programmes-committees-section";
 import SiteFooter from "@/components/site-footer";
 import HoverCard from "@/components/hover-card";
 import {
@@ -26,6 +27,12 @@ export const metadata: Metadata = {
 };
 
 const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
+
+const LIVING_BEINGS_POINTS = [
+  "Honour the right of every living being—human and animal—to a shared home on this earth.",
+  "Stand with forest-dwelling communities through village institutions, CFG committees, and consent-led practice.",
+  "Strengthen women’s cooperatives, organic farmers’ groups, and Bal Akhra youth assemblies for stewardship and livelihoods.",
+] as const;
 
 const PRINCIPLE_CARDS = [
   {
@@ -160,51 +167,44 @@ export default function ProgrammesPage() {
 
         <section
           id="living-beings"
-          className={`border-t border-gray-200 bg-gray-50 pb-16 pt-14 md:pb-24 md:pt-20 ${sectionPad}`}
+          className={`border-t border-gray-200 bg-gray-100 pb-16 pt-14 md:pb-24 md:pt-20 ${sectionPad}`}
         >
-          <div className="grid grid-cols-1 items-start gap-10 lg:items-center lg:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,30rem)] xl:grid-cols-[minmax(0,1fr)_minmax(0,36rem)] xl:gap-16">
-            <div className="min-w-0 lg:pr-4">
-              <p className="font-['Inter'] text-[0.75rem] font-[600] uppercase tracking-[0.22em] text-[color:var(--icfg-forest)]">
-                Living beings
-              </p>
-              <h2
-                className={`${playfairDisplay.className} mt-3 max-w-[44rem] text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
-              >
-                A common home for every living being
-              </h2>
-              <div className="mt-8 max-w-[40rem] space-y-5 font-['Inter'] text-[1rem] leading-[1.85rem] text-gray-700">
-                <p>
-                  Our work is rooted in the belief that every living being—human
-                  or animal, small or large—has the right to survive on this
-                  earth. That conviction shapes how we support forest-dwelling
-                  communities, organise village institutions, and run residential
-                  learning programmes.
-                </p>
-                <p>
-                  The sections below set out{" "}
-                  <strong className="font-[600] text-black">
-                    our principles
-                  </strong>
-                  , the{" "}
-                  <strong className="font-[600] text-black">
-                    committees and groups
-                  </strong>{" "}
-                  we help communities form, and the{" "}
-                  <strong className="font-[600] text-black">
-                    training courses
-                  </strong>{" "}
-                  we offer in the field and at our centres.
-                </p>
-              </div>
-            </div>
-            <div className="relative mx-auto h-[22.5rem] w-full max-w-[36rem] overflow-hidden rounded-2xl border border-gray-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.08)] lg:mx-0 lg:max-w-full lg:justify-self-end">
+          <div className="mx-auto grid max-w-[90rem] grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
+            <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-gray-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
               <Image
                 src="/programms/PCI-India_Womens-SHG.webp"
                 alt="Women’s self-help group and community programme work"
                 fill
-                sizes="(max-width: 1024px) 100vw, 576px"
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-[center_40%]"
               />
+            </div>
+            <div className="min-w-0 lg:pl-2">
+              <p className="font-['Inter'] text-[0.75rem] font-[600] uppercase tracking-[0.22em] text-[color:var(--icfg-forest)]">
+                Living beings
+              </p>
+              <h2
+                className={`${SatoshiBold.className} mt-3 max-w-xl text-[1.85rem] leading-[1.15] tracking-[-0.04em] text-black md:text-[2.25rem] lg:text-[2.5rem]`}
+              >
+                A common home for every living being
+              </h2>
+              <p className="mt-4 max-w-xl font-['Inter'] text-[0.95rem] leading-[1.65rem] text-gray-700">
+                Our work is rooted in the belief that every living being—human or
+                animal, small or large—has the right to survive on this earth. We
+                support forest-dwelling communities, village institutions, and
+                residential learning that reflect that conviction.
+              </p>
+              <ul className="mt-5 max-w-xl list-outside list-disc space-y-1 pl-4 font-['Inter'] text-[0.8125rem] leading-[1.45] text-gray-700 marker:text-black md:text-[0.85rem] md:leading-[1.5]">
+                {LIVING_BEINGS_POINTS.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <Link
+                href="#committees"
+                className="icfg-btn-primary mt-8 flex w-full items-center justify-center rounded-2xl px-8 py-3.5 text-center font-['Inter'] text-[0.95rem] font-[500] tracking-[-0.02em]"
+              >
+                Explore committees &amp; training
+              </Link>
             </div>
           </div>
           <div className="mt-10 flex flex-col items-stretch gap-6 md:mt-14 md:flex-row md:items-start md:justify-center md:gap-5 lg:mt-16 lg:gap-6">
@@ -219,92 +219,9 @@ export default function ProgrammesPage() {
           </div>
         </section>
 
-        <section
-          id="committees"
-          className={`bg-gray-100 py-14 md:py-20 ${sectionPad}`}
-        >
-          <div className="max-w-[52rem]">
-            <h2
-              className={`${playfairDisplay.className} text-[1.75rem] text-black md:text-[2.1rem]`}
-            >
-              Our committees
-            </h2>
-            <div className="mt-8 space-y-10 font-['Inter'] text-[1rem] leading-[1.85rem] text-gray-700">
-                <article>
-                  <h3 className="font-['Inter'] text-[1.05rem] font-[600] tracking-[-0.03em] text-black md:text-[1.1rem]">
-                    Community Forest Governance committee (CFG)
-                  </h3>
-                  <p className="mt-3">
-                    It is responsible for the overall supervision of the tasks of
-                    protection, regeneration and management of the forest and
-                    forest biodiversity including the animal life. Usually, it
-                    has{" "}
-                    <strong className="font-[600] text-black">
-                      20 members
-                    </strong>{" "}
-                    with equal number of men and women. It develops a collective
-                    leadership for mobilisation of the villagers and their
-                    capacity building for forest conservation. It initiates the
-                    formation of all our other committees—our Women’s Cooperative,
-                    our Farmer’s group &amp; our Youth Assembly (Bal Akhra).
-                  </p>
-                </article>
-                <article>
-                  <h3 className="font-['Inter'] text-[1.05rem] font-[600] tracking-[-0.03em] text-black md:text-[1.1rem]">
-                    Forest dependent women’s Self Help Group (SHG)
-                  </h3>
-                  <p className="mt-3">
-                    Our Women’s Cooperative is formed to motivate women for
-                    sustainable harvesting and collective marketing of forest
-                    produces. In every village several Self-Help Groups are
-                    formed and together they form the cooperative. ICFG helps them
-                    to be in touch with the bigger markets outside the
-                    inter-village ones. Besides they are also connected to the
-                    government agencies so that their products can be sold at the
-                    Minimum Support Price set by the state government. Programmes
-                    are also taken up for their capacity building.
-                  </p>
-                </article>
-                <article>
-                  <h3 className="font-['Inter'] text-[1.05rem] font-[600] tracking-[-0.03em] text-black md:text-[1.1rem]">
-                    Organic Farmers’ Group (OFG)
-                  </h3>
-                  <p className="mt-3">
-                    Farmers’ groups are formed to promote organic farming
-                    practices, enhancing sustainability and productivity. ICFG
-                    organizes village-based training and workshops to disseminate
-                    knowledge and techniques. For advanced training, selected
-                    farmers are brought to our training and demonstration centre
-                    for comprehensive residential courses. This hands-on approach
-                    ensures farmers gain practical experience and in-depth
-                    understanding. Through these efforts, we aim to cultivate a
-                    network of proficient organic farmers dedicated to sustainable
-                    agriculture.
-                  </p>
-                </article>
-                <article>
-                  <h3 className="font-['Inter'] text-[1.05rem] font-[600] tracking-[-0.03em] text-black md:text-[1.1rem]">
-                    Youth Assembly (Bal Akhra)
-                  </h3>
-                  <p className="mt-3">
-                    Bal Akhra (Youth Assembly) consists of children in the age
-                    group of{" "}
-                    <strong className="font-[600] text-black">14 to 17</strong>{" "}
-                    years. They act as the stewards of nature. Every year they
-                    prepare plant nurseries, make seed balls and plant trees in the
-                    degraded parts of the forestland in the village. They are also
-                    trained to fight forest fire. ICFG organises workshops for
-                    their skill development. Learning classes are held to provide
-                    knowledge on (i) collective leadership, (ii) education on
-                    traditional dance and music—folklore and festivals, (iii)
-                    knowledge of medicinal plants and (iv) tribal culture of
-                    symbiotic relationship with nature. They are also motivated
-                    to become future leaders of the village.
-                  </p>
-                </article>
-            </div>
-          </div>
-        </section>
+        <ProgrammesCommitteesSection
+          sectionClassName={`bg-gray-100 py-14 md:py-20 ${sectionPad}`}
+        />
 
         <section
           id="learning-programs"

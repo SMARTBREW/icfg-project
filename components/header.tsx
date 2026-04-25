@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "/about", label: "About us" },
-  { href: "/#values", label: "Our values" },
-  { href: "/programmes", label: "Programmes" },
-  { href: "/#impact", label: "Impact" },
+  { href: "/blogs", label: "Blogs" },
+  { href: "/programmes", label: "Stories" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/#contact", label: "Contact" },
 ] as const;
 
