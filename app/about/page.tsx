@@ -30,6 +30,98 @@ export const metadata: Metadata = {
 
 const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
 
+const MILESTONES = [
+  {
+    year: "2006",
+    title: "ICFG founded as a trust",
+    body: "Set up by leaders of the Jharkhand Jangal Bachao Andolan (JJBA) to give the forest rights movement an institutional anchor.",
+  },
+  {
+    year: "2006",
+    title: "Forest Rights Act enacted",
+    body: "The Scheduled Tribes and Other Traditional Forest Dwellers (Recognition of Forest Rights) Act becomes law—central to ICFG’s field work.",
+  },
+  {
+    year: "2008",
+    title: "FRA Rules notified",
+    body: "Rules under the Act open the door for Gram Sabha-led claims; ICFG begins facilitation in early districts.",
+  },
+  {
+    year: "2012",
+    title: "FRA Rules amended",
+    body: "Amendments strengthen Gram Sabha primacy and CFR procedures—ICFG re-trains field coordinators on the new processes.",
+  },
+  {
+    year: "Today",
+    title: "Roughly 10 districts, give or take",
+    body: "About 36 field coordinators on the road in any given quarter, working alongside JJBA’s ~20,000 members across an estimated 2,500 villages reached since 2008.",
+  },
+] as const;
+
+const CFR_STEPS = [
+  {
+    n: "1",
+    title: "Gram Sabha resolution",
+    body: "The village assembly meets, resolves to claim Community Forest Rights, and forms a Forest Rights Committee with women and youth represented.",
+  },
+  {
+    n: "2",
+    title: "Boundary mapping & evidence",
+    body: "Traditional boundaries are walked, sketched, and documented—oral histories, old records, and photographs gathered with elders.",
+  },
+  {
+    n: "3",
+    title: "Claim form & filing",
+    body: "Form B (Community Rights) is prepared with the FRC, approved by the Gram Sabha, and submitted to the Sub-Divisional Level Committee (SDLC).",
+  },
+  {
+    n: "4",
+    title: "SDLC & DLC review",
+    body: "Officials verify the claim. ICFG accompanies villagers to hearings and helps respond to queries; many claims need persistent follow-up.",
+  },
+  {
+    n: "5",
+    title: "Title and management plan",
+    body: "Once the title is granted, the Gram Sabha drafts forest management rules—patrols, harvesting calendars, dispute resolution—and registers a CFG committee.",
+  },
+] as const;
+
+type Founder = {
+  name: string;
+  role: string;
+  body: string;
+  initials: string;
+  honorific?: string;
+};
+
+const FOUNDERS: readonly Founder[] = [
+  {
+    name: "Dr. Ram Dayal Munda",
+    honorific: "Padmashri",
+    role: "Founder trustee · 1939–2011",
+    body: "Linguist and scholar of Adivasi society, former Vice-Chancellor of Ranchi University, and a steady voice in the long argument for Adivasi cultural and political rights in Jharkhand.",
+    initials: "RDM",
+  },
+  {
+    name: "Mr. Prem Prakash Verma",
+    role: "Founder trustee",
+    body: "Came in from decades of social work in central India. Did the unglamorous work of turning the JJBA’s field demands into a registered trust that could file claims, sign agreements, and hold an audit.",
+    initials: "PPV",
+  },
+  {
+    name: "Dr. Alex Ekka",
+    role: "Founder trustee",
+    body: "Sociologist who has researched Adivasi land and forest tenure for years. Keeps the trust honest about evidence — where data exists, where it doesn’t, and what we can fairly claim.",
+    initials: "AE",
+  },
+  {
+    name: "Samar (Sanjay) Bosu Mullick",
+    role: "Founder trustee",
+    body: "Long-time activist and writer with the Jharkhand Jangal Bachao Andolan. The reason ICFG’s office and the movement’s villages still talk to each other in the same language.",
+    initials: "SBM",
+  },
+];
+
 const COMMITMENT_BLOCKS = [
   {
     title: "Training & collaboration",
@@ -209,9 +301,10 @@ export default function AboutPage() {
                   <strong className="font-[600] text-black">
                     10 districts
                   </strong>{" "}
-                  where ICFG is active now. We are as diverse as we are
-                  inclusive—people from all backgrounds and walks of life who
-                  share aims and values and work together to make a better world.
+                  where ICFG is currently active. The team is a mix of forest
+                  community members, paralegals, researchers, and former
+                  movement organisers — most of them based in the districts
+                  they work in.
                 </p>
               </div>
             </div>
@@ -403,33 +496,171 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <section
+          id="founders"
+          className={`border-t border-gray-200 bg-gray-50 py-14 md:py-20 ${sectionPad}`}
+        >
+          <div className="mx-auto max-w-6xl">
+            <h2
+              className={`${playfairDisplay.className} max-w-[44rem] text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
+            >
+              Founder trustees
+            </h2>
+            <p className="mt-5 max-w-[44rem] font-['Inter'] text-[0.98rem] leading-[1.75rem] text-gray-700">
+              ICFG was set up in 2006 by people who had already spent two
+              decades inside the Jharkhand forest rights movement. Some are no
+              longer with us; the trust still works in their direction.
+            </p>
+            <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {FOUNDERS.map((p) => (
+                <li
+                  key={p.name}
+                  className="flex h-full flex-col rounded-2xl border border-gray-200/80 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] md:p-7"
+                >
+                  <span
+                    aria-hidden
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--icfg-forest)] font-['Inter'] text-[0.95rem] font-[600] tracking-[0.02em] text-white"
+                  >
+                    {p.initials}
+                  </span>
+                  {p.honorific ? (
+                    <p className="mt-4 font-['Inter'] text-[0.72rem] font-[600] uppercase tracking-[0.22em] text-[color:var(--icfg-forest)]">
+                      {p.honorific}
+                    </p>
+                  ) : null}
+                  <h3
+                    className={`${p.honorific ? "mt-1" : "mt-4"} font-['Inter'] text-[1.05rem] font-[600] tracking-[-0.02em] text-black md:text-[1.1rem]`}
+                  >
+                    {p.name}
+                  </h3>
+                  <p className="mt-1 font-['Inter'] text-[0.82rem] font-[500] tracking-[-0.01em] text-gray-500">
+                    {p.role}
+                  </p>
+                  <p className="mt-4 font-['Inter'] text-[0.92rem] leading-[1.65rem] text-gray-700">
+                    {p.body}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 font-['Inter'] text-[0.85rem] leading-[1.6rem] text-gray-500">
+              The current board includes new members from across the field
+              network. The first rule, then and now, is that the Gram Sabha
+              decides — not Ranchi.
+            </p>
+          </div>
+        </section>
+
+        <section
+          id="milestones"
+          className={`border-t border-gray-200 bg-gray-50 py-14 md:py-20 ${sectionPad}`}
+        >
+          <div className="mx-auto max-w-5xl">
+            <h2
+              className={`${playfairDisplay.className} max-w-[40rem] text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
+            >
+              Milestones along the way
+            </h2>
+            <p className="mt-4 max-w-[40rem] font-['Inter'] text-[0.95rem] leading-[1.7rem] text-gray-600">
+              The dates that matter to ICFG are mostly statutory — when the law
+              changed, when a rule was rewritten, when a registration came
+              through. The villages have their own calendar.
+            </p>
+            <ol className="relative mt-12 border-l-2 border-[color:var(--icfg-leaf)]/35 pl-6 md:pl-10">
+              {MILESTONES.map((m) => (
+                <li
+                  key={`${m.year}-${m.title}`}
+                  className="relative mb-10 last:mb-0"
+                >
+                  <span
+                    className="absolute -left-[2.05rem] top-1 inline-flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-[color:var(--icfg-forest)] shadow-[0_0_0_3px_rgba(46,90,49,0.18)] md:-left-[2.55rem]"
+                    aria-hidden
+                  />
+                  <p className="font-['Inter'] text-[0.78rem] font-[600] uppercase tracking-[0.22em] text-[color:var(--icfg-forest)]">
+                    {m.year}
+                  </p>
+                  <h3 className="mt-2 font-['Inter'] text-[1.05rem] font-[600] tracking-[-0.02em] text-black md:text-[1.15rem]">
+                    {m.title}
+                  </h3>
+                  <p className="mt-2 max-w-[40rem] font-['Inter'] text-[0.95rem] leading-[1.7rem] text-gray-700">
+                    {m.body}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section
+          id="how-cfr-works"
+          className={`border-t border-gray-200 bg-gray-100 py-14 md:py-20 ${sectionPad}`}
+        >
+          <div className="mx-auto max-w-6xl">
+            <h2
+              className={`${playfairDisplay.className} mx-auto max-w-[44rem] text-center text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
+            >
+              Filing a CFR claim, step by step
+            </h2>
+            <p className="mx-auto mt-5 max-w-[40rem] text-center font-['Inter'] text-[0.98rem] leading-[1.75rem] text-gray-700">
+              The Forest Rights Act lays out the procedure. The reality is more
+              meetings, more paperwork, and more waiting than any flowchart
+              suggests. This is the path we walk alongside a village.
+            </p>
+            <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+              {CFR_STEPS.map((s) => (
+                <li
+                  key={s.n}
+                  className="flex h-full flex-col rounded-2xl border border-gray-200/80 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)]"
+                >
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--icfg-forest)] font-['Inter'] text-[0.95rem] font-[600] text-white">
+                    {s.n}
+                  </span>
+                  <h3 className="mt-5 font-['Inter'] text-[1rem] font-[600] tracking-[-0.02em] text-black md:text-[1.05rem]">
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 font-['Inter'] text-[0.92rem] leading-[1.65rem] text-gray-700">
+                    {s.body}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
         <section className="border-t border-gray-200 bg-gray-50 py-14 md:py-20">
           <div className={sectionPad}>
-            <h2
-              className={`${playfairDisplay.className} text-center text-[1.75rem] text-black md:text-[2.1rem]`}
-            >
-              Why it matters
-            </h2>
-            <p className="mx-auto mt-6 max-w-[48rem] text-center font-['Inter'] text-[1rem] leading-[1.85rem] text-gray-700">
-              Forests and people in India face overlapping pressures—tenure
-              insecurity, climate stress, and competing land uses. ICFG exists to
-              strengthen the side of the equation that too often goes unheard:
-              the knowledge, rights claims, and leadership of forest communities
-              themselves.
-            </p>
-            <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Link
-                href="/#impact"
-                className="icfg-btn-primary inline-flex rounded-2xl px-8 py-3.5 font-['Inter'] text-[0.95rem] font-[500] tracking-[-0.02em]"
+            <div className="mx-auto max-w-3xl">
+              <h2
+                className={`${playfairDisplay.className} text-[1.6rem] leading-tight text-black md:text-[1.95rem]`}
               >
-                See our impact
-              </Link>
-              <Link
-                href="/#contact"
-                className="rounded-2xl border border-[color:var(--icfg-leaf)]/35 bg-white px-8 py-3.5 font-['Inter'] text-[0.95rem] font-[500] tracking-[-0.02em] text-black shadow-sm"
-              >
-                Get in touch
-              </Link>
+                Why this exists
+              </h2>
+              <div className="mt-6 space-y-5 font-['Inter'] text-[1rem] leading-[1.85rem] text-gray-700">
+                <p>
+                  Forest land in India sits inside a tangle of laws, agencies,
+                  and competing claims. The communities who have lived in those
+                  forests for generations end up arguing for what was already
+                  theirs — usually with the lightest paperwork in the room.
+                </p>
+                <p>
+                  ICFG exists to even out that paperwork: file claims, train
+                  the people who file them, document the cases that fall apart
+                  so the next ones don’t. None of this is fast work.
+                </p>
+              </div>
+              <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+                <Link
+                  href="/donate"
+                  className="icfg-btn-primary inline-flex rounded-2xl px-7 py-3.5 font-['Inter'] text-[0.95rem] font-[500] tracking-[-0.02em]"
+                >
+                  Donate
+                </Link>
+                <Link
+                  href="/blogs"
+                  className="font-['Inter'] text-[0.95rem] font-[500] text-[color:var(--icfg-forest)] underline-offset-4 hover:underline"
+                >
+                  Read the field stories →
+                </Link>
+              </div>
             </div>
           </div>
         </section>

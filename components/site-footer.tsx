@@ -7,7 +7,7 @@ const FOOTER_LINKS = [
   { href: "/blogs", label: "Blogs" },
   { href: "/gallery", label: "Gallery" },
   { href: "/certificates", label: "Certificates" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 const LEGAL_LINKS = [
@@ -66,13 +66,24 @@ export default function SiteFooter() {
             </nav>
           </div>
 
-          <div className="flex flex-col justify-start gap-3 border-t border-white/10 pt-10 lg:col-span-3 lg:col-start-10 lg:border-t-0 lg:border-l lg:border-white/10 lg:pt-0 lg:pl-10">
+          <div className="flex flex-col justify-start gap-4 border-t border-white/10 pt-10 lg:col-span-3 lg:col-start-10 lg:border-t-0 lg:border-l lg:border-white/10 lg:pt-0 lg:pl-10">
             <p className="font-['Inter'] text-[0.75rem] font-[600] uppercase tracking-[0.2em] text-gray-500">
-              Institute
+              This quarter
             </p>
-            <p className="font-['Inter'] text-[0.9rem] leading-[1.55rem] text-gray-400">
-              Non-profit registered in India. Field-led programmes with
-              community consent and transparent reporting.
+            <p className="font-['Inter'] text-[0.9rem] leading-[1.6rem] text-gray-400">
+              Donations are going towards travel and printing for pending CFR
+              hearings in Saraikela-Kharsawan, and stipends for two new
+              paralegals being trained this season.
+            </p>
+            <Link
+              href="/donate"
+              className="icfg-btn-primary mt-1 inline-flex w-fit items-center justify-center rounded-2xl px-6 py-3 font-['Inter'] text-[0.9rem] font-[600] tracking-[-0.01em] text-white"
+            >
+              Donate
+            </Link>
+            <p className="mt-2 font-['Inter'] text-[0.75rem] leading-[1.4rem] text-gray-500">
+              Office runs lighter from late June to August. Email replies may
+              take a couple of weeks during monsoon.
             </p>
           </div>
         </div>

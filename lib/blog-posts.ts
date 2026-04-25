@@ -2,6 +2,27 @@ export type BlogBodyBlock =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string };
 
+export type BlogTopic =
+  | "fra"
+  | "gram-sabha"
+  | "ntfp"
+  | "women"
+  | "youth"
+  | "training"
+  | "conflict"
+  | "culture";
+
+export const BLOG_TOPICS: ReadonlyArray<{ id: BlogTopic; label: string }> = [
+  { id: "fra", label: "FRA" },
+  { id: "gram-sabha", label: "Gram Sabha" },
+  { id: "ntfp", label: "Forest produce" },
+  { id: "women", label: "Women & SHGs" },
+  { id: "youth", label: "Youth" },
+  { id: "training", label: "Training" },
+  { id: "conflict", label: "Conflict & advocacy" },
+  { id: "culture", label: "Culture" },
+];
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -9,6 +30,8 @@ export type BlogPost = {
   date: string;
   readTime: string;
   paragraphs: string[];
+  /** Topic tags for filtering on the blogs list page. */
+  topics?: readonly BlogTopic[];
   /** Structured sections (headings + paragraphs). When set, used instead of `paragraphs` for the article body. */
   bodyBlocks?: readonly BlogBodyBlock[];
   /** YouTube video ID for an embedded player (e.g. `9a8bz_x566U` from youtube.com/watch?v=…). */
@@ -20,6 +43,26 @@ export type BlogPost = {
   sourceUrl?: string;
 };
 
+export type AuthorBio = {
+  /** Short, specific one-liner. Avoid generic “field correspondent” boilerplate. */
+  bio: string;
+  /** Optional role line shown above the name. */
+  role?: string;
+};
+
+/** Per-author bios, keyed by `BlogPost.author`. */
+export const AUTHORS: Readonly<Record<string, AuthorBio>> = {
+  "Kundan Gupta": {
+    role: "Field documentation, ICFG",
+    bio: "Travels with the JJBA team across Saraikela-Kharsawan and Ranchi districts to document Gram Sabha proceedings. Co-facilitates trainings on tendu and sal seed processing. Writes in Hindi first, edited into English by the team.",
+  },
+};
+
+export function getAuthorBio(author?: string): AuthorBio | undefined {
+  if (!author) return undefined;
+  return AUTHORS[author];
+}
+
 export const BLOG_POSTS: readonly BlogPost[] = [
   {
     slug: "johar-jharkhandi-tradition-greetings",
@@ -28,6 +71,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "JOHAR! is a welcoming or greeting tradition of the people of Jharkhand or the Adivasis of Jharkhand. How to do and how not to do? To know about the meaning and culture behind the gesture of JOHAR, watch this full video.",
     date: "2024-11-09",
     readTime: "Video",
+    topics: ["culture"],
     paragraphs: [],
     youtubeId: "9a8bz_x566U",
     author: "Kundan Gupta",
@@ -42,6 +86,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "Raisinghdiri, nestled amidst forests and mountains in Jharkhand, was a village plagued by poverty and land disputes before the implementation of the Forest Rights Act. Home to predominantly Munda tribal families, their history is one of struggle against exploitation and marginalization.",
     date: "2024-05-31",
     readTime: "7 min read",
+    topics: ["fra", "gram-sabha"],
     paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
@@ -100,6 +145,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "Dango village, under Kuchai block of Seraikela-Kharsawan district, lies about 4 km southwest of the block headquarters. Around 85 percent of the villagers depend on the forest for their livelihood.",
     date: "2024-05-31",
     readTime: "8 min read",
+    topics: ["fra", "gram-sabha"],
     paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
@@ -166,6 +212,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "The Forest Rights Act, 2006, has significantly transformed the lives of the forest-dwellers in Chaingada village, Budhmu block, Ranchi district, Jharkhand. Prior to the enactment of this legislation, the villagers faced numerous challenges and lived in constant fear of the forest department’s actions. The implementation of the Forest Rights Act, supported by initiatives like the Jharkhand Jungle Bachao Andolan, has empowered the community and improved their livelihoods and standards of living.",
     date: "2024-05-31",
     readTime: "9 min read",
+    topics: ["fra", "gram-sabha", "culture"],
     paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
@@ -238,6 +285,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "On 18 May 2024, the Forest Department demolished two houses under construction in Lalkimati village, Tajpur Panchayat, Chouparan block, Hazaribagh district—sparking urgent debate on community forest rights.",
     date: "2024-05-24",
     readTime: "8 min read",
+    topics: ["fra", "conflict", "gram-sabha"],
     paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
@@ -303,6 +351,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "On 20 February 2024, villagers of Rouro in Upar Barga Panchayat, Gola block, Ramgarh district, came together to assert their rights under the Forest Rights Act (FRA) of 2006—erecting billboards along traditional forest boundaries.",
     date: "2024-05-23",
     readTime: "7 min read",
+    topics: ["fra", "gram-sabha"],
     paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
@@ -349,6 +398,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "A field visit to tribal villages in Gadchiroli explored the implementation of the Forest Rights Act and its impact—from Menda (Lekha)’s pioneering CFR to Gram Sabhas in Kasari, Andhki, and Bhimna Payali.",
     date: "2024-04-01",
     readTime: "10 min read",
+    topics: ["fra", "gram-sabha", "ntfp"],
     paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
@@ -407,6 +457,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "On 27 January 2024, the Gram Sabha Manch of Kuchai Block, Saraikela-Kharsawan, Jharkhand, rallied to protest destruction of the Hasdev Aranya forest and submitted a memorandum to the Prime Minister through the BDO.",
     date: "2024-02-02",
     readTime: "6 min read",
+    topics: ["conflict", "gram-sabha", "fra"],
     paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
@@ -451,6 +502,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "On 23 January 2024, ICFG held a one-day training at Prem Prakash Sabhagar in Kotari village (Budmu Block) on collection, processing, and marketing of tendu patta—50 participants from 12 villages.",
     date: "2024-01-25",
     readTime: "7 min read",
+    topics: ["ntfp", "training"],
     paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
@@ -494,6 +546,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "Community forest governance begins when the village assembly can speak with one voice on protection, use, and consent.",
     date: "2026-03-12",
     readTime: "6 min read",
+    topics: ["gram-sabha", "fra"],
     paragraphs: [
       "The Forest Rights Act recognises what forest dwellers have long practised: that use and care of the forest belong together. In our work, the Gram Sabha is not a box to tick—it is where claims are debated, patrol routes agreed, and conflicts slowed before they harden.",
       "ICFG supports facilitation that keeps minutes honest, women and youth in the room, and links to CFG committees and SHGs concrete. Rights on paper mean little if the assembly cannot convene or if officials treat meetings as rituals.",
@@ -507,6 +560,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "Self-help groups and cooperatives help women move from distress sale to fair prices—with training and market linkages.",
     date: "2026-02-28",
     readTime: "5 min read",
+    topics: ["women", "ntfp"],
     paragraphs: [
       "Minor forest produce often leaves the village at a fraction of its value. Women’s groups we work with are shifting that pattern through grading, simple processing, and negotiating as a collective.",
       "Training covers sustainable harvesting, record-keeping, and conversations with traders and government schemes—including minimum support price channels where they exist. The goal is not charity but predictable income and respect for labour.",
@@ -520,6 +574,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
       "Seed balls, nurseries, and fire readiness—teenagers learn leadership by doing, beside elders and forest staff.",
     date: "2026-01-15",
     readTime: "4 min read",
+    topics: ["youth", "training"],
     paragraphs: [
       "Youth assemblies bring teenagers into restoration work that is visible and urgent: filling nurseries, planting degraded patches, and practising early response to forest fire.",
       "Workshops add structure—folklore and ecology, medicinal plants, and how collective leadership differs from loud individualism. Many participants will sit in Gram Sabhas within a few years; the habits they form now matter.",
@@ -534,4 +589,21 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 
 export function getAllBlogSlugs(): string[] {
   return BLOG_POSTS.map((p) => p.slug);
+}
+
+/** Posts sorted newest-first by `date`. */
+export function getSortedBlogPosts(): readonly BlogPost[] {
+  return [...BLOG_POSTS].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
+
+/** Up to `count` posts other than the given slug, newest first. */
+export function getRelatedPosts(
+  slug: string,
+  count: number = 3
+): readonly BlogPost[] {
+  return getSortedBlogPosts()
+    .filter((p) => p.slug !== slug)
+    .slice(0, count);
 }

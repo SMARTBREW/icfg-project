@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import BlogList from "@/components/blog-list";
 import Header from "@/components/header";
 import SiteFooter from "@/components/site-footer";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
@@ -20,14 +21,6 @@ export const metadata: Metadata = {
 
 const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
 const BLOGS_HERO = "/about/DSC_0069-1.webp";
-
-function formatDate(iso: string) {
-  return new Intl.DateTimeFormat("en-IN", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(new Date(iso));
-}
 
 export default function BlogsPage() {
   return (
@@ -63,54 +56,40 @@ export default function BlogsPage() {
             <p
               className={`${playfairDisplay.className} mt-6 max-w-2xl text-[clamp(0.95rem,2.2vw,1.35rem)] leading-[1.45] tracking-[-0.02em] text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]`}
             >
-              Short essays from our practice—rights, institutions, and the slow
-              work of building trust in forest villages.
+              Field reports, short essays, and notes from Gram Sabha visits.
+              Mostly written first in Hindi, then edited into English.
             </p>
           </div>
         </section>
 
         <section className={`py-14 md:py-20 ${sectionPad}`}>
-          <div className="mx-auto max-w-[52rem]">
-            <p className="font-['Inter'] text-[0.75rem] font-[600] uppercase tracking-[0.22em] text-[color:var(--icfg-forest)]">
-              Latest
-            </p>
-            <h2
-              className={`${playfairDisplay.className} mt-3 text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
-            >
-              From the field desk
-            </h2>
-            <ul className="mt-12 space-y-12">
-              {BLOG_POSTS.map((post) => (
-                <li key={post.slug}>
-                  <article className="border-b border-gray-200 pb-12 last:border-b-0 last:pb-0">
-                    <p className="font-['Inter'] text-[0.8rem] text-gray-500">
-                      <time dateTime={post.date}>{formatDate(post.date)}</time>
-                      <span aria-hidden> · </span>
-                      <span>{post.readTime}</span>
-                    </p>
-                    <h3
-                      className={`${SatoshiBold.className} mt-3 text-[1.35rem] leading-snug tracking-[-0.03em] text-black md:text-[1.5rem]`}
-                    >
-                      <Link
-                        href={`/blogs/${post.slug}`}
-                        className="transition-colors hover:text-[color:var(--icfg-forest)]"
-                      >
-                        {post.title}
-                      </Link>
-                    </h3>
-                    <p className="mt-3 font-['Inter'] text-[1rem] leading-[1.75rem] text-gray-700">
-                      {post.excerpt}
-                    </p>
-                    <Link
-                      href={`/blogs/${post.slug}`}
-                      className="mt-4 inline-flex font-['Inter'] text-[0.9rem] font-[500] text-[color:var(--icfg-forest)] underline-offset-4 hover:underline"
-                    >
-                      Read article
-                    </Link>
-                  </article>
-                </li>
-              ))}
-            </ul>
+          <div className="mx-auto max-w-6xl">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+              <h2
+                className={`${playfairDisplay.className} text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
+              >
+                Stories, reports, and reflections
+              </h2>
+              <p className="font-['Inter'] text-[0.85rem] text-gray-600 sm:max-w-[20rem] sm:text-right">
+                Pick a topic, or just scroll the latest first.
+              </p>
+            </div>
+
+            <BlogList posts={BLOG_POSTS} />
+
+            <div className="mt-16 flex flex-col items-start gap-4 border-t border-gray-200 pt-10 md:flex-row md:items-center md:justify-between md:gap-10">
+              <p className="max-w-[28rem] font-['Inter'] text-[0.92rem] leading-[1.65rem] text-gray-600">
+                Most of these stories were written on the back of a long bus
+                ride. If they’re useful to you, the easiest way to keep them
+                coming is to chip in for the bus.
+              </p>
+              <Link
+                href="/donate"
+                className="icfg-btn-primary shrink-0 inline-flex rounded-2xl px-6 py-3.5 font-['Inter'] text-[0.9rem] font-[500] tracking-[-0.02em]"
+              >
+                Donate
+              </Link>
+            </div>
           </div>
         </section>
       </main>

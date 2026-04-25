@@ -11,7 +11,9 @@ import {
   IconScale,
 } from "@/components/icfg-icons";
 import ImpactMetricCounter from "@/components/impact-metric-counter";
+import FieldStrip from "@/components/field-strip";
 import PartnersMarquee from "@/components/partners-marquee";
+import RecentStories from "@/components/recent-stories";
 import SectionHeading from "@/components/section-heading";
 import SiteFooter from "@/components/site-footer";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
@@ -74,22 +76,16 @@ export default function Home() {
               protecting ecosystems, and building livelihoods that keep forests
               standing.
             </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link href="/#contact">
-                <button
-                  type="button"
-                  className="icfg-btn-primary w-full rounded-2xl px-[2.75rem] py-[1.125rem] font-['Inter'] font-[500] tracking-[-0.02em] sm:w-auto"
-                >
-                  Support the work
-                </button>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+              <Link href="/donate" className="w-full sm:w-[14rem]">
+                <span className="icfg-btn-primary flex w-full items-center justify-center rounded-2xl px-10 py-5 text-center font-['Inter'] text-[1.05rem] font-[600] tracking-[-0.02em] md:text-[1.125rem]">
+                  Donate
+                </span>
               </Link>
-              <Link href="/#impact">
-                <button
-                  type="button"
-                  className="w-full rounded-2xl border border-[color:var(--icfg-leaf)]/35 bg-white/95 px-[2.75rem] py-[1.125rem] font-['Inter'] font-[500] tracking-[-0.02em] text-black shadow-sm backdrop-blur-[2px] sm:w-auto"
-                >
+              <Link href="/#impact" className="w-full sm:w-[14rem]">
+                <span className="flex w-full items-center justify-center rounded-2xl border border-[color:var(--icfg-leaf)]/35 bg-white/95 px-10 py-5 text-center font-['Inter'] text-[1.05rem] font-[500] tracking-[-0.02em] text-black shadow-sm backdrop-blur-[2px] md:text-[1.125rem]">
                   See our impact
-                </button>
+                </span>
               </Link>
             </div>
           </div>
@@ -259,6 +255,10 @@ export default function Home() {
             </FadeInSection>
           </div>
         </section>
+
+        <RecentStories />
+
+        <FieldStrip />
 
         <section className="w-full bg-gray-50 py-12 md:py-20">
           <FadeInSection

@@ -24,8 +24,14 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function ContactForm({
   variant = "light",
+  className = "",
+  formId = "contact",
 }: {
   variant?: "light" | "dark";
+  /** Extra classes for the form element (e.g. spacing on standalone pages). */
+  className?: string;
+  /** `id` attribute; use a unique value if multiple forms exist on one layout. */
+  formId?: string;
 }) {
   const isLight = variant === "light";
   const labelClass = isLight
@@ -96,8 +102,8 @@ export default function ContactForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto mt-16 w-full max-w-[40rem] space-y-6"
-      id="contact"
+      className={`mx-auto mt-16 w-full max-w-[40rem] space-y-6 ${className}`}
+      id={formId}
     >
       <div>
         <label htmlFor="name" className={labelClass}>

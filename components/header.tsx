@@ -6,7 +6,7 @@ const NAV_LINKS = [
   { href: "/blogs", label: "Blogs" },
   { href: "/programmes", label: "Stories" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export default function Header() {
@@ -26,7 +26,10 @@ export default function Header() {
             priority
           />
         </Link>
-        <nav aria-label="Main navigation" className="hidden md:block">
+        <nav
+          aria-label="Main navigation"
+          className="hidden md:flex md:flex-1 md:flex-wrap md:items-center md:justify-end md:gap-5 lg:gap-8"
+        >
           <ul className="flex flex-wrap items-center justify-end gap-5 lg:gap-8">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
@@ -39,12 +42,18 @@ export default function Header() {
               </li>
             ))}
           </ul>
+          <Link
+            href="/donate"
+            className="icfg-btn-primary inline-flex items-center justify-center rounded-2xl px-5 py-2.5 font-['Inter'] text-[0.9rem] font-[600] tracking-[-0.01em] text-white"
+          >
+            Donate
+          </Link>
         </nav>
         <Link
-          href="/#contact"
-          className="icfg-btn-primary rounded-2xl px-5 py-2.5 font-['Inter'] text-[0.85rem] font-[500] md:hidden"
+          href="/donate"
+          className="icfg-btn-primary inline-flex items-center justify-center rounded-2xl px-5 py-2.5 font-['Inter'] text-[0.85rem] font-[600] md:hidden"
         >
-          Support
+          Donate
         </Link>
       </div>
     </header>

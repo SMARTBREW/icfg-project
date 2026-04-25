@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import Link from "next/link";
+
+import GalleryGrid from "@/components/gallery-grid";
 import Header from "@/components/header";
 import SiteFooter from "@/components/site-footer";
 import { GALLERY_ITEMS } from "@/constants/gallery";
@@ -70,26 +73,18 @@ export default function GalleryPage() {
             >
               People, forests, and the work between them
             </h2>
-            <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-              {GALLERY_ITEMS.map((item) => (
-                <li key={item.src}>
-                  <figure className="group overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-                    <div className="relative aspect-[4/3] w-full overflow-hidden">
-                      <Image
-                        src={item.src}
-                        alt={item.alt}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                    </div>
-                    <figcaption className="px-4 py-3 font-['Inter'] text-[0.85rem] font-[500] tracking-[-0.02em] text-gray-800">
-                      {item.caption}
-                    </figcaption>
-                  </figure>
-                </li>
-              ))}
-            </ul>
+            <GalleryGrid items={GALLERY_ITEMS} />
+            <div className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
+              <p className="text-center font-['Inter'] text-[0.9rem] text-gray-600 sm:text-left">
+                Help ICFG keep programmes going in the field.
+              </p>
+              <Link
+                href="/donate"
+                className="icfg-btn-primary inline-flex rounded-2xl px-6 py-3.5 font-['Inter'] text-[0.9rem] font-[500] tracking-[-0.02em]"
+              >
+                Donate
+              </Link>
+            </div>
           </div>
         </section>
       </main>

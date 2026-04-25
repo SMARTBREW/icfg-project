@@ -115,6 +115,52 @@ const COURSES = [
   },
 ] as const;
 
+const FIELD_YEAR = [
+  {
+    months: "Mar – May",
+    title: "Tendu & mahua",
+    body: "Peak NTFP collection. Coordinators support sustainable harvesting, grading, and the first round of collective marketing through women’s SHGs.",
+  },
+  {
+    months: "Jun – Sep",
+    title: "Monsoon & patrols",
+    body: "Forest patrol routes are revised, fire-line work pauses, and Gram Sabhas review boundaries after rains. Plantation drives in degraded patches.",
+  },
+  {
+    months: "Oct",
+    title: "Mahua flowering & festivals",
+    body: "Cultural calendar peaks. Programme work slows around Sarhul/Karma rhythms; documentation and community planning take centre stage.",
+  },
+  {
+    months: "Nov – Feb",
+    title: "Trainings & claim drives",
+    body: "Residential courses (FRA, organic farming, NTFP marketing), Bal Akhra youth assemblies, and SDLC/DLC follow-up for pending CFR claims.",
+  },
+] as const;
+
+const INDICATORS = [
+  {
+    value: "~2,500",
+    label: "Villages worked with",
+    note: "Across roughly 10 districts in Jharkhand and a few in Chhattisgarh & Odisha. Counts since 2008.",
+  },
+  {
+    value: "≈20,000",
+    label: "JJBA members on the roll",
+    note: "Mass-organisation base. The roster shifts each year; this is the rough count from the last all-state meet.",
+  },
+  {
+    value: "36",
+    label: "Field coordinators",
+    note: "Plus 16 office staff. We hire and let go in step with grant cycles, so this number moves quarterly.",
+  },
+  {
+    value: "6",
+    label: "Residential courses a year",
+    note: "Cohort sizes vary 8–22, depending on village availability and harvest dates.",
+  },
+] as const;
+
 function courseBody(course: (typeof COURSES)[number]): string {
   const meta = `Age group: ${course.age}. ${course.days}. ${course.type}.`;
   if (course.topics.length === 0) {
@@ -224,6 +270,96 @@ export default function ProgrammesPage() {
         />
 
         <section
+          id="year-in-the-field"
+          className={`border-t border-gray-200 bg-gray-50 py-14 md:py-20 ${sectionPad}`}
+        >
+          <div className="mx-auto max-w-6xl">
+            <h2
+              className={`${playfairDisplay.className} max-w-[40rem] text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
+            >
+              A year in the field
+            </h2>
+            <p className="mt-5 max-w-[44rem] font-['Inter'] text-[0.98rem] leading-[1.75rem] text-gray-700">
+              The forest sets the rhythm. Trainings cluster in the cold months,
+              boundary walks happen after rains, and a lot of the calendar
+              quietly bends around tendu, mahua, and Sarhul.
+            </p>
+            <ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {FIELD_YEAR.map((row) => (
+                <li
+                  key={row.months}
+                  className="flex h-full flex-col rounded-2xl border border-gray-200/80 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] md:p-7"
+                >
+                  <p className="font-['Inter'] text-[0.78rem] font-[600] uppercase tracking-[0.22em] text-[color:var(--icfg-forest)]">
+                    {row.months}
+                  </p>
+                  <h3 className="mt-3 font-['Inter'] text-[1.05rem] font-[600] tracking-[-0.02em] text-black md:text-[1.1rem]">
+                    {row.title}
+                  </h3>
+                  <p className="mt-3 font-['Inter'] text-[0.92rem] leading-[1.65rem] text-gray-700">
+                    {row.body}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section
+          id="what-we-measure"
+          className={`border-t border-gray-200 bg-gray-100 py-14 md:py-20 ${sectionPad}`}
+        >
+          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+            <div>
+              <h2
+                className={`${playfairDisplay.className} text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
+              >
+                The numbers we are willing to be held to
+              </h2>
+              <p className="mt-5 font-['Inter'] text-[0.98rem] leading-[1.75rem] text-gray-700">
+                We try to count things a Gram Sabha can also count: claims
+                filed, titles received, women in committees, hectares under CFR.
+                The rest of the indicators below are honest approximations and
+                we revise them when the field disagrees.
+              </p>
+              <p
+                className={`${SatoshiBold.className} mt-10 text-[3.25rem] leading-none tracking-[-0.04em] text-black md:text-[4.25rem]`}
+              >
+                {INDICATORS[0].value}
+              </p>
+              <p className="mt-3 font-['Inter'] text-[1rem] font-[600] tracking-[-0.02em] text-black">
+                {INDICATORS[0].label}
+              </p>
+              <p className="mt-2 max-w-[28rem] font-['Inter'] text-[0.9rem] leading-[1.6rem] text-gray-600">
+                {INDICATORS[0].note}
+              </p>
+            </div>
+            <dl className="divide-y divide-gray-300/70 border-t border-gray-300/70">
+              {INDICATORS.slice(1).map((m) => (
+                <div
+                  key={m.label}
+                  className="flex flex-col gap-2 py-6 md:flex-row md:items-baseline md:gap-8"
+                >
+                  <dt
+                    className={`${SatoshiBold.className} w-[6rem] shrink-0 text-[1.9rem] leading-none tracking-[-0.03em] text-black md:text-[2.25rem]`}
+                  >
+                    {m.value}
+                  </dt>
+                  <dd>
+                    <p className="font-['Inter'] text-[0.95rem] font-[600] tracking-[-0.02em] text-black">
+                      {m.label}
+                    </p>
+                    <p className="mt-1 font-['Inter'] text-[0.88rem] leading-[1.6rem] text-gray-600">
+                      {m.note}
+                    </p>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        <section
           id="learning-programs"
           className={`border-t border-gray-200 bg-gray-50 py-14 md:py-20 ${sectionPad}`}
         >
@@ -236,8 +372,7 @@ export default function ProgrammesPage() {
             <p>
               Residential and village-based courses build skills across
               conservation, rights, organic farming, marketing, and climate
-              awareness—aligned with how communities actually live and work in
-              forest landscapes.
+              awareness, in the rhythm of village life rather than against it.
             </p>
           </div>
           <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-x-12 gap-y-12 md:mt-16 md:grid-cols-2 md:gap-x-16 md:gap-y-14 lg:gap-x-20">
@@ -274,18 +409,18 @@ export default function ProgrammesPage() {
               defend rights, restore forests, and pass knowledge to the next
               generation—without separating culture from conservation.
             </p>
-            <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
               <Link
-                href="/#impact"
+                href="/donate"
                 className="icfg-btn-primary inline-flex rounded-2xl px-8 py-3.5 font-['Inter'] text-[0.95rem] font-[500] tracking-[-0.02em]"
               >
-                See our impact
+                Donate
               </Link>
               <Link
-                href="/#contact"
+                href="/#impact"
                 className="rounded-2xl border border-[color:var(--icfg-leaf)]/35 bg-white px-8 py-3.5 font-['Inter'] text-[0.95rem] font-[500] tracking-[-0.02em] text-black shadow-sm"
               >
-                Get in touch
+                See our impact
               </Link>
             </div>
           </div>
