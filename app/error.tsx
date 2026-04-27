@@ -4,10 +4,10 @@ import { useEffect } from "react";
 
 export default function Error({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  unstable_retry: () => void;
 }) {
   useEffect(() => {
     if (process.env.NODE_ENV === "development") {
@@ -25,7 +25,7 @@ export default function Error({
       </p>
       <button
         type="button"
-        onClick={() => reset()}
+        onClick={() => unstable_retry()}
         className="icfg-btn-primary mt-8 rounded-2xl px-8 py-3 font-['Inter'] font-[500]"
       >
         Try again

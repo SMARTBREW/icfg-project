@@ -91,7 +91,7 @@ export default function CertificatesPage() {
             src={CERT_HERO}
             alt="Forest landscape"
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover object-center"
           />

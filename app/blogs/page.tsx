@@ -32,7 +32,7 @@ export default function BlogsPage() {
             src={BLOGS_HERO}
             alt="Forest hills and community landscape"
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover object-center"
           />

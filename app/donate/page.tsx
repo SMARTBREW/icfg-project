@@ -71,7 +71,7 @@ export default function DonatePage() {
             src={DONATE_HERO}
             alt=""
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover object-center"
           />

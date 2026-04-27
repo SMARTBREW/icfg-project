@@ -90,7 +90,7 @@ export default function ContactPage() {
             src={CONTACT_HERO}
             alt=""
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover object-center"
           />

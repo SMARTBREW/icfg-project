@@ -185,7 +185,7 @@ export default function GalleryGrid({ items }: Props) {
                   fill
                   sizes="(max-width: 1024px) 100vw, 1024px"
                   className="object-contain"
-                  priority
+                  preload
                 />
               </div>
             </div>

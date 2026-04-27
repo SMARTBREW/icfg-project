@@ -179,7 +179,7 @@ export default function ProgrammesPage() {
             src={PROGRAMMES_HERO_IMAGE}
             alt="Community field programmes and forest landscapes"
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover object-center"
           />

@@ -33,7 +33,7 @@ export default function GalleryPage() {
             src={GALLERY_HERO}
             alt="Forest village landscape"
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover object-center"
           />

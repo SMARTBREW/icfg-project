@@ -49,7 +49,7 @@ export default function Home() {
             src={HERO_IMAGE}
             alt="Forest and community landscape in India"
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover object-center"
           />

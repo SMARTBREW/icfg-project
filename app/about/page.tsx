@@ -155,7 +155,7 @@ export default function AboutPage() {
             src={HERO_IMAGE}
             alt="Forest landscape central to community life and culture"
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover object-center"
           />

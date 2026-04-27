@@ -23,7 +23,7 @@ export default function Header() {
             width={320}
             height={72}
             className="icfg-header-logo h-11 w-auto object-contain object-left md:h-[3.25rem]"
-            priority
+            preload
           />
         </Link>
         <nav

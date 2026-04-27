@@ -71,7 +71,7 @@ export default async function BlogArticlePage({ params }: Props) {
               src={ARTICLE_HERO}
               alt=""
               fill
-              priority
+              preload
               sizes="100vw"
               className="object-cover object-center"
             />
