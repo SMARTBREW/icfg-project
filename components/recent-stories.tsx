@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { playfairDisplay } from "@/constants";
+import { sectionPad } from "@/constants/layout";
 import { getSortedBlogPosts } from "@/lib/blog-posts";
 
 const dateFmt = new Intl.DateTimeFormat("en-IN", {
@@ -18,7 +19,7 @@ export default function RecentStories() {
       id="recent-stories"
       className="w-full bg-gray-50 py-12 text-black md:py-16"
     >
-      <div className="mx-[2rem] md:mx-[4.5rem] md:px-[8vw]">
+        <div className={sectionPad}>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
           <h2
             className={`${playfairDisplay.className} max-w-[34rem] text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}

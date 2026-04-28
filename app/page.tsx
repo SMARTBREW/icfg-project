@@ -4,46 +4,31 @@ import Link from "next/link";
 import ContactForm from "@/components/contact-form";
 import FadeInSection from "@/components/fade-in-section";
 import Header from "@/components/header";
-import {
-  IconCapacityBuilding,
-  IconCommunityEmpowerment,
-  IconLeaf,
-  IconScale,
-} from "@/components/icfg-icons";
+import HomeValuesSection from "@/components/home-values-section";
 import ImpactMetricCounter from "@/components/impact-metric-counter";
 import FieldStrip from "@/components/field-strip";
 import PartnersMarquee from "@/components/partners-marquee";
 import RecentStories from "@/components/recent-stories";
 import SectionHeading from "@/components/section-heading";
 import SiteFooter from "@/components/site-footer";
-import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
+import { SatoshiBold } from "@/constants";
+import { sectionPad } from "@/constants/layout";
 import {
   CASE_STORY,
   HERO_IMAGE,
   IMPACT_METRICS,
-  PARTNER_PLACEHOLDERS,
   STORY_IMAGE,
   TRUST_IMAGE_ALTS,
   TRUST_IMAGES,
   TRUST_POINTS,
-  VALUE_PILLARS,
 } from "@/constants/icfg";
 
-const PILLAR_ICONS = {
-  community: IconCommunityEmpowerment,
-  leaf: IconLeaf,
-  scale: IconScale,
-  capacity: IconCapacityBuilding,
-} as const;
-
-const sectionPad =
-  "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
         <FadeInSection className="relative w-full min-h-[min(92vh,52rem)] overflow-hidden bg-gray-100">
           <Image
             src={HERO_IMAGE}
@@ -53,25 +38,28 @@ export default function Home() {
             sizes="100vw"
             className="object-cover object-center"
           />
-          {/* Left-weighted scrim so the photo stays visible on the right; not a full-screen wash */}
+          {/* Left-weighted dark scrim keeps the image visible while preserving text contrast. */}
           <div
-            className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-gray-50 from-[0%] via-gray-50/88 via-[38%] to-transparent to-[74%]"
+            className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-black/70 from-[0%] via-black/45 via-[40%] to-black/10 to-[78%]"
             aria-hidden
           />
           <div
             className={`relative z-10 flex min-h-[min(88vh,48rem)] max-w-[52rem] flex-col justify-end pb-20 pt-28 ${sectionPad} md:pb-28 md:pt-36`}
           >
-            <p
+            {/* <p
               className={`${instrumentSerif.className} text-[1.35rem] italic tracking-[-1px] text-black md:text-[1.6rem]`}
             >
               Institute of Community Forest Governance
-            </p>
+            </p> */}
             <h1
-              className={`${SatoshiBold.className} mt-5 text-[2.75rem] leading-[1.08] tracking-[-0.06em] text-black md:text-[4.25rem] lg:text-[5rem]`}
+              className={`${SatoshiBold.className} mt-5 text-[2.25rem] leading-[1.1] tracking-[-0.05em] text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.5)] md:text-[3.35rem] lg:text-[4rem]`}
             >
-              Power belongs with people who live in the forest.
+              Restoring forests with communities
             </h1>
-            <p className="mt-8 max-w-[38rem] font-['Inter'] text-[1.05rem] font-[400] leading-[1.85rem] tracking-[-0.03em] text-black md:text-[1.125rem]">
+            <p className="mt-1 pl-2 font-['Inter'] text-[1.05rem] font-[700] italic leading-[1.85rem] tracking-[-0.03em] text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.55)] md:pl-3 md:text-[1.125rem]">
+              for nature and climate.
+            </p>
+            <p className="mt-8 max-w-[38rem] font-['Inter'] text-[1.05rem] font-[400] leading-[1.85rem] tracking-[-0.03em] text-white/95 [text-shadow:0_1px_6px_rgba(0,0,0,0.55)] md:text-[1.125rem]">
               We walk alongside tribal communities in India securing rights,
               protecting ecosystems, and building livelihoods that keep forests
               standing.
@@ -91,46 +79,13 @@ export default function Home() {
           </div>
         </FadeInSection>
 
-        <section id="values" className="w-full bg-gray-50 py-12 text-black md:py-16">
-          <div className={sectionPad}>
-            <SectionHeading title="Our values" />
-            <FadeInSection className="mt-14 md:mt-20">
-              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-                {VALUE_PILLARS.map((pillar) => {
-                  const Icon = PILLAR_ICONS[pillar.icon];
-                  const toneClass =
-                    pillar.iconTone === "gold"
-                      ? "text-[#b8973a]"
-                      : "text-[#6b2a32]";
-                  return (
-                    <article
-                      key={pillar.id}
-                      className="flex flex-col items-center gap-4 rounded-2xl bg-white px-5 py-8 text-center shadow-[0_14px_44px_-14px_rgba(0,0,0,0.22)] ring-1 ring-black/[0.06] md:px-6"
-                    >
-                      <span
-                        className={`inline-flex shrink-0 items-center justify-center ${toneClass}`}
-                      >
-                        <Icon className="h-9 w-9 md:h-10 md:w-10" />
-                      </span>
-                      <h3
-                        className={`${playfairDisplay.className} text-[1.2rem] leading-snug text-black md:text-[1.35rem]`}
-                      >
-                        {pillar.title}
-                      </h3>
-                      <p className="font-['Inter'] text-[0.92rem] leading-[1.65rem] tracking-[-0.01em] text-gray-700 md:text-[0.95rem]">
-                        {pillar.body}
-                      </p>
-                    </article>
-                  );
-                })}
-              </div>
-            </FadeInSection>
-          </div>
-        </section>
+        <div className={sectionPad}>
+          <HomeValuesSection />
+        </div>
 
         <section className="w-full bg-gray-100 py-12 md:py-16">
           <div className={sectionPad}>
-            <FadeInSection id="impact">
+            <FadeInSection id="impact" className="md:pl-4">
               <h2 className="text-center font-['Inter'] text-[0.85rem] font-[600] uppercase tracking-[0.28em] text-[color:var(--icfg-forest)]">
                 Impact at a glance
               </h2>
@@ -223,16 +178,6 @@ export default function Home() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />
-                  </div>
-                ))}
-              </div>
-              <div className="mt-14 flex flex-wrap items-center justify-center gap-4 md:gap-6">
-                {PARTNER_PLACEHOLDERS.map((name) => (
-                  <div
-                    key={name}
-                    className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-4 font-['Inter'] text-[0.9rem] font-[500] tracking-[-0.02em] text-gray-800 shadow-sm"
-                  >
-                    {name}
                   </div>
                 ))}
               </div>

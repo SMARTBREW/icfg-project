@@ -4,5 +4,5 @@ export {
   playfairDisplay,
   SatoshiBold,
 } from "./fonts";
-export type { CertificateItem, TestimonialProps } from "./types";
-export { CERTIFICATES, TESTIMONIALS } from "./content";
+export type { CertificateItem } from "./types";
+export { CERTIFICATES } from "./content";

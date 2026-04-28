@@ -13,6 +13,7 @@ import {
   IconUsers,
 } from "@/components/icfg-icons";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
+import { sectionPad } from "@/constants/layout";
 import { PROGRAMMES_HERO_IMAGE } from "@/constants/icfg";
 
 export const metadata: Metadata = {
@@ -26,7 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
 
 const LIVING_BEINGS_POINTS = [
   "Honour the right of every living being—human and animal—to a shared home on this earth.",
@@ -173,7 +173,7 @@ export default function ProgrammesPage() {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
         <section className="relative w-full min-h-[min(88vh,46rem)] overflow-hidden border-b border-gray-200">
           <Image
             src={PROGRAMMES_HERO_IMAGE}
@@ -338,14 +338,14 @@ export default function ProgrammesPage() {
               {INDICATORS.slice(1).map((m) => (
                 <div
                   key={m.label}
-                  className="flex flex-col gap-2 py-6 md:flex-row md:items-baseline md:gap-8"
+                  className="grid gap-3 py-6 md:grid-cols-[minmax(8.5rem,10rem)_minmax(0,1fr)] md:gap-10"
                 >
                   <dt
-                    className={`${SatoshiBold.className} w-[6rem] shrink-0 text-[1.9rem] leading-none tracking-[-0.03em] text-black md:text-[2.25rem]`}
+                    className={`${SatoshiBold.className} tabular-nums text-[2rem] leading-none tracking-[-0.03em] text-black md:text-[2.4rem]`}
                   >
                     {m.value}
                   </dt>
-                  <dd>
+                  <dd className="md:pt-1">
                     <p className="font-['Inter'] text-[0.95rem] font-[600] tracking-[-0.02em] text-black">
                       {m.label}
                     </p>

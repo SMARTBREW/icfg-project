@@ -4,25 +4,25 @@ import { playfairDisplay } from "@/constants";
 
 const FIELD_PHOTOS = [
   {
-    src: "/programms/DSC04758-1-1.webp",
+    src: "/all/Firefly.webp",
     alt: "Community forest governance committee at work",
     location: "Kuchai, Seraikela-Kharsawan",
     when: "Mar 2024",
   },
   {
-    src: "/programms/PCI-India_Womens-SHG.webp",
+    src: "/all/IMG_20230924_093059-scaled.webp",
     alt: "Women’s self-help group meeting",
     location: "Raisinghdiri",
     when: "May 2024",
   },
   {
-    src: "/programms/DSC_0256-2.webp",
+    src: "/all/IMG_20230924_100427-scaled.webp",
     alt: "Bal Akhra youth assembly",
     location: "Budmu, Ranchi",
     when: "Nov 2024",
   },
   {
-    src: "/about/DSC05008-scaled.webp",
+    src: "/all/IMG_20230925_113936-scaled.webp",
     alt: "Gram Sabha consultation in a forest village",
     location: "Gola, Ramgarh",
     when: "Feb 2024",

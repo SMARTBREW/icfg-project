@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+import FilterChip from "@/components/filter-chip";
 import {
   GALLERY_CATEGORIES,
   type GalleryCategory,
@@ -56,25 +57,6 @@ export default function GalleryGrid({ items }: Props) {
 
   const active = lightboxIndex !== null ? filtered[lightboxIndex] : null;
 
-  const chip = (id: Filter, label: string) => {
-    const isActive = filter === id;
-    return (
-      <button
-        key={id}
-        type="button"
-        onClick={() => setFilter(id)}
-        aria-pressed={isActive}
-        className={`rounded-full px-4 py-2 font-['Inter'] text-[0.82rem] font-[500] tracking-[-0.01em] transition ${
-          isActive
-            ? "border border-transparent bg-[color:var(--icfg-forest)] text-white shadow-sm"
-            : "border border-gray-200 bg-white text-gray-700 hover:border-[color:var(--icfg-leaf)]/50 hover:text-[color:var(--icfg-forest)]"
-        }`}
-      >
-        {label}
-      </button>
-    );
-  };
-
   return (
     <div>
       <div
@@ -82,8 +64,10 @@ export default function GalleryGrid({ items }: Props) {
         role="group"
         aria-label="Filter gallery"
       >
-        {chip("all", "All")}
-        {GALLERY_CATEGORIES.map((c) => chip(c.id, c.label))}
+        <FilterChip id="all" label="All" isActive={filter === "all"} onClick={() => setFilter("all")} />
+        {GALLERY_CATEGORIES.map((c) => (
+          <FilterChip key={c.id} id={c.id} label={c.label} isActive={filter === c.id} onClick={() => setFilter(c.id)} />
+        ))}
       </div>
 
       {filtered.length === 0 ? (

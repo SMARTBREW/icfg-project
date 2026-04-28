@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@/components/header";
 import SiteFooter from "@/components/site-footer";
 import { playfairDisplay, SatoshiBold } from "@/constants";
+import { sectionPad } from "@/constants/layout";
 
 export const metadata: Metadata = {
   title: "Return Policy — Institute of Community Forest Governance",
@@ -16,7 +17,6 @@ export const metadata: Metadata = {
   },
 };
 
-const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
 
 const prose =
   "max-w-3xl font-['Inter'] text-[1rem] leading-[1.85rem] text-gray-700";
@@ -27,7 +27,7 @@ export default function ReturnPolicyPage() {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
         <header
           className={`border-b border-gray-200 bg-white py-12 md:py-16 ${sectionPad}`}
         >

@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import FilterChip from "@/components/filter-chip";
 import { playfairDisplay, SatoshiBold } from "@/constants";
+import { useDebounce } from "@/hooks/use-debounce";
 import {
   BLOG_TOPICS,
   type BlogPost,
@@ -28,6 +30,8 @@ function topicLabel(id: BlogTopic): string {
 
 export default function BlogList({ posts }: Props) {
   const [filter, setFilter] = useState<Filter>("all");
+  const [searchRaw, setSearchRaw] = useState("");
+  const search = useDebounce(searchRaw.trim().toLowerCase(), 300);
 
   const sorted = useMemo(
     () =>
@@ -47,31 +51,19 @@ export default function BlogList({ posts }: Props) {
   }, [sorted]);
 
   const filteredRest = useMemo(() => {
-    if (filter === "all") return rest;
-    return rest.filter((p) => p.topics?.includes(filter));
-  }, [rest, filter]);
+    let result = filter === "all" ? rest : rest.filter((p) => p.topics?.includes(filter));
+    if (search) {
+      result = result.filter(
+        (p) =>
+          p.title.toLowerCase().includes(search) ||
+          p.excerpt.toLowerCase().includes(search)
+      );
+    }
+    return result;
+  }, [rest, filter, search]);
 
   const featuredMatchesFilter =
     filter === "all" || featured?.topics?.includes(filter);
-
-  const chip = (id: Filter, label: string) => {
-    const isActive = filter === id;
-    return (
-      <button
-        key={id}
-        type="button"
-        onClick={() => setFilter(id)}
-        aria-pressed={isActive}
-        className={`rounded-full px-4 py-2 font-['Inter'] text-[0.82rem] font-[500] tracking-[-0.01em] transition ${
-          isActive
-            ? "border border-transparent bg-[color:var(--icfg-forest)] text-white shadow-sm"
-            : "border border-gray-200 bg-white text-gray-700 hover:border-[color:var(--icfg-leaf)]/50 hover:text-[color:var(--icfg-forest)]"
-        }`}
-      >
-        {label}
-      </button>
-    );
-  };
 
   return (
     <div>
@@ -124,13 +116,29 @@ export default function BlogList({ posts }: Props) {
         </article>
       ) : null}
 
+      <div className="mt-12">
+        <label htmlFor="blog-search" className="sr-only">
+          Search stories
+        </label>
+        <input
+          id="blog-search"
+          type="search"
+          value={searchRaw}
+          onChange={(e) => setSearchRaw(e.target.value)}
+          placeholder="Search stories…"
+          className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 font-['Inter'] text-[0.95rem] text-black outline-none placeholder:text-gray-400 focus:border-[color:var(--icfg-leaf)] focus:ring-1 focus:ring-[color:var(--icfg-leaf)] sm:max-w-[22rem]"
+        />
+      </div>
+
       <div
-        className="mt-12 flex flex-wrap items-center gap-2"
+        className="mt-6 flex flex-wrap items-center gap-2"
         role="group"
         aria-label="Filter by topic"
       >
-        {chip("all", "All")}
-        {visibleTopics.map((t) => chip(t.id, t.label))}
+        <FilterChip id="all" label="All" isActive={filter === "all"} onClick={() => setFilter("all")} />
+        {visibleTopics.map((t) => (
+          <FilterChip key={t.id} id={t.id} label={t.label} isActive={filter === t.id} onClick={() => setFilter(t.id)} />
+        ))}
       </div>
 
       {filteredRest.length === 0 && !featuredMatchesFilter ? (

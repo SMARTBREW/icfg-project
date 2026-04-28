@@ -8,6 +8,7 @@ import ReadingProgressBar from "@/components/reading-progress-bar";
 import ShareRow from "@/components/share-row";
 import SiteFooter from "@/components/site-footer";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
+import { sectionPad } from "@/constants/layout";
 import {
   getAllBlogSlugs,
   getAuthorBio,
@@ -17,7 +18,6 @@ import {
   type BlogPost,
 } from "@/lib/blog-posts";
 
-const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
 const ARTICLE_HERO = "/programms/DSC04758-1-1.webp";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -33,6 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} — ICFG`,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blogs/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -50,7 +53,7 @@ function formatDate(iso: string) {
 
 function articleBodyBlocks(post: BlogPost): readonly BlogBodyBlock[] {
   if (post.bodyBlocks?.length) return post.bodyBlocks;
-  return post.paragraphs.map((text) => ({ type: "paragraph" as const, text }));
+  return (post.paragraphs ?? []).map((text) => ({ type: "paragraph" as const, text }));
 }
 
 export default async function BlogArticlePage({ params }: Props) {
@@ -64,7 +67,7 @@ export default async function BlogArticlePage({ params }: Props) {
     <>
       <ReadingProgressBar />
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
         <article>
           <header className="relative w-full min-h-[min(52vh,28rem)] overflow-hidden border-b border-gray-200">
             <Image
@@ -166,13 +169,13 @@ export default async function BlogArticlePage({ params }: Props) {
                 {articleBodyBlocks(post).map((block, i) =>
                   block.type === "heading" ? (
                     <h3
-                      key={i}
+                      key={`heading-${i}`}
                       className={`${SatoshiBold.className} !mt-10 mb-2 text-[1.05rem] leading-snug tracking-[-0.03em] text-black first:!mt-0 md:text-[1.1rem]`}
                     >
                       {block.text}
                     </h3>
                   ) : (
-                    <p key={i}>{block.text}</p>
+                    <p key={`para-${i}`}>{block.text}</p>
                   )
                 )}
               </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "@/components/header";
 import SiteFooter from "@/components/site-footer";
 import { INSTITUTE_CONTACT } from "@/constants/institute-contact";
+import { sectionPad } from "@/constants/layout";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
 
 export const metadata: Metadata = {
@@ -18,7 +19,6 @@ export const metadata: Metadata = {
   },
 };
 
-const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
 const DONATE_HERO = "/programms/DSC04758-1-1.webp";
 
 const ALLOCATION = [
@@ -65,7 +65,7 @@ export default function DonatePage() {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
         <section className="relative w-full min-h-[min(60vh,36rem)] overflow-hidden border-b border-gray-200">
           <Image
             src={DONATE_HERO}

@@ -4,10 +4,10 @@ import "./globals.css";
 
 export default function GlobalError({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  unstable_retry: () => void;
 }) {
   return (
     <html lang="en">
@@ -20,7 +20,7 @@ export default function GlobalError({
         </p>
         <button
           type="button"
-          onClick={() => reset()}
+          onClick={() => unstable_retry()}
           className="icfg-btn-primary mt-8 rounded-2xl px-8 py-3 font-['Inter'] font-[500]"
         >
           Try again

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "ICFG — Institute of Community Forest Governance",
     description:
       "Forest rights, community stewardship, and dignified livelihoods across India.",
-    images: ["/next.svg"],
+    images: ["/hero/icfg-logo.webp"],
   },
   twitter: {
     card: "summary_large_image",
@@ -44,6 +44,12 @@ export default function RootLayout({
       <body
         className={`${interBody.className} flex min-h-full flex-col bg-gray-50 text-black`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-white focus:px-6 focus:py-3 focus:font-['Inter'] focus:text-[0.9rem] focus:font-[600] focus:text-black focus:shadow-lg focus:outline-none"
+        >
+          Skip to content
+        </a>
         <Providers>{children}</Providers>
       </body>
     </html>

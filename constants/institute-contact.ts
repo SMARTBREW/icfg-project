@@ -1,14 +1,17 @@
-/**
- * Public-facing contact and location hints. Update with official channels when confirmed.
- * Website: https://icfgindia.org
- */
 export const INSTITUTE_CONTACT = {
-  /** Shown in UI; replace with a monitored inbox when available. */
-  emailDisplay: "info@icfgindia.org",
-  emailMailto: "mailto:info@icfgindia.org",
-  /** Broad location only—avoid publishing full street without verification. */
-  region: "Jharkhand, India",
-  responseTime:
-    "We aim to reply within 5–10 working days. During intensive field work, it may take a little longer.",
-  officeHours: "Field coordination is by appointment. Written inquiries via the form are preferred.",
+  emailDisplay: "icfg.ranchi@gmail.com",
+  emailMailto: "mailto:icfg.ranchi@gmail.com",
+  region: "Ranchi, Jharkhand",
+  address:
+    "Institute of Community Forest Governance, 2nd Floor, Simdega Bhawan, Purulia Road, Kantatoli, Ranchi.",
+  phones: ["0651-3502529", "9431103041"] as const,
+  responseTime: "We aim to reply within 5-10 working days.",
+  officeHours: "Written inquiries via the form are preferred.",
+  bankDetails: {
+    accountHolder: "Institute of Community Forest Governance",
+    accountNumber: "017501023840",
+    ifscCode: "ICIC0000175",
+    micrCode: "834229002",
+    upi: "communityforest@ucobank",
+  },
 } as const;

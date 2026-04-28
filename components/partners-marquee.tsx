@@ -28,7 +28,7 @@ export default function PartnersMarquee() {
               alt={partner.alt}
               fill
               sizes="(max-width: 768px) 176px, 224px"
-              className="object-contain object-center grayscale contrast-[1.06]"
+              className="object-contain object-center"
             />
           </div>
         ))}
@@ -43,7 +43,7 @@ export default function PartnersMarquee() {
               alt=""
               fill
               sizes="(max-width: 768px) 176px, 224px"
-              className="object-contain object-center grayscale contrast-[1.06]"
+              className="object-contain object-center"
             />
           </div>
         ))}

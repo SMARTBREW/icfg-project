@@ -27,9 +27,12 @@ export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
+  /** ISO 8601 date string, e.g. "2024-11-09". */
   date: string;
-  readTime: string;
-  paragraphs: string[];
+  /** Human-readable read time, e.g. "4 min read" or "Video". */
+  readTime: `${number} min read` | "Video" | "Photo essay";
+  /** Legacy field — prefer bodyBlocks. Kept for backward compatibility. */
+  paragraphs?: string[];
   /** Topic tags for filtering on the blogs list page. */
   topics?: readonly BlogTopic[];
   /** Structured sections (headings + paragraphs). When set, used instead of `paragraphs` for the article body. */
@@ -72,7 +75,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-11-09",
     readTime: "Video",
     topics: ["culture"],
-    paragraphs: [],
     youtubeId: "9a8bz_x566U",
     author: "Kundan Gupta",
     sourceUrl:
@@ -87,7 +89,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-05-31",
     readTime: "7 min read",
     topics: ["fra", "gram-sabha"],
-    paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
       "https://icfgindia.org/the-story-of-raisinghdiri-villages-transformation-through-the-forest-rights-act-fra-unfolds-as-a-journey-from-struggle-to-empowerment-from-fear-to-hope-and-from-poverty-to-prosperity-lets-enc/",
@@ -146,7 +147,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-05-31",
     readTime: "8 min read",
     topics: ["fra", "gram-sabha"],
-    paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
       "https://icfgindia.org/dango-an-active-and-strong-gram-sabha-success-stories-1/",
@@ -213,7 +213,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-05-31",
     readTime: "9 min read",
     topics: ["fra", "gram-sabha", "culture"],
-    paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
       "https://icfgindia.org/the-forest-rights-act-has-changed-the-life-of-the-forest-dwellers-of-chaingada/",
@@ -286,7 +285,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-05-24",
     readTime: "8 min read",
     topics: ["fra", "conflict", "gram-sabha"],
-    paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
       "https://icfgindia.org/demolition-in-lalkimati-village-a-clash-between-community-rights-and-forest-department-actions/",
@@ -352,7 +350,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-05-23",
     readTime: "7 min read",
     topics: ["fra", "gram-sabha"],
-    paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
       "https://icfgindia.org/asserting-forest-rights-erection-of-bill-board-in-rouro-village/",
@@ -399,7 +396,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-04-01",
     readTime: "10 min read",
     topics: ["fra", "gram-sabha", "ntfp"],
-    paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
       "https://icfgindia.org/empowering-communities-through-forest-rights-a-field-report-from-gadchiroli/",
@@ -458,7 +454,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-02-02",
     readTime: "6 min read",
     topics: ["conflict", "gram-sabha", "fra"],
-    paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
       "https://icfgindia.org/gram-sabha-manch-kuchais-plea-to-prime-minister-via-bdo-save-hasdev-aarnya-forest-in-surguja-district-chhattisgarh/",
@@ -503,7 +498,6 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2024-01-25",
     readTime: "7 min read",
     topics: ["ntfp", "training"],
-    paragraphs: [],
     author: "Kundan Gupta",
     sourceUrl:
       "https://icfgindia.org/unlocking-the-potential-of-tendu-leaf-a-comprehensive-training-program/",
@@ -575,6 +569,7 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     date: "2026-01-15",
     readTime: "4 min read",
     topics: ["youth", "training"],
+    mp4VideoUrl: "/all/Baal%20Akhra.mp4",
     paragraphs: [
       "Youth assemblies bring teenagers into restoration work that is visible and urgent: filling nurseries, planting degraded patches, and practising early response to forest fire.",
       "Workshops add structure—folklore and ecology, medicinal plants, and how collective leadership differs from loud individualism. Many participants will sit in Gram Sabhas within a few years; the habits they form now matter.",
@@ -582,6 +577,17 @@ export const BLOG_POSTS: readonly BlogPost[] = [
     ],
   },
 ] as const;
+
+if (process.env.NODE_ENV !== "production") {
+  for (const post of BLOG_POSTS) {
+    if (isNaN(new Date(post.date).getTime())) {
+      throw new Error(`[blog-posts] Invalid date "${post.date}" in post "${post.slug}"`);
+    }
+    if (post.author && !(post.author in AUTHORS)) {
+      console.warn(`[blog-posts] Author "${post.author}" in post "${post.slug}" has no entry in AUTHORS`);
+    }
+  }
+}
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug);
@@ -598,12 +604,25 @@ export function getSortedBlogPosts(): readonly BlogPost[] {
   );
 }
 
-/** Up to `count` posts other than the given slug, newest first. */
+/**
+ * Up to `count` posts related to the given slug.
+ * Posts that share at least one topic are scored higher than date alone.
+ * Falls back to most-recent when no topic overlap exists.
+ */
 export function getRelatedPosts(
   slug: string,
   count: number = 3
 ): readonly BlogPost[] {
+  const source = getBlogPost(slug);
+  const sourceTopics = new Set(source?.topics ?? []);
+
   return getSortedBlogPosts()
     .filter((p) => p.slug !== slug)
+    .sort((a, b) => {
+      const aScore = (a.topics ?? []).filter((t) => sourceTopics.has(t)).length;
+      const bScore = (b.topics ?? []).filter((t) => sourceTopics.has(t)).length;
+      if (bScore !== aScore) return bScore - aScore;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    })
     .slice(0, count);
 }

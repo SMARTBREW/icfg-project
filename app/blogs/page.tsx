@@ -6,6 +6,7 @@ import BlogList from "@/components/blog-list";
 import Header from "@/components/header";
 import SiteFooter from "@/components/site-footer";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
+import { sectionPad } from "@/constants/layout";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 
 export const metadata: Metadata = {
@@ -19,18 +20,17 @@ export const metadata: Metadata = {
   },
 };
 
-const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
-const BLOGS_HERO = "/about/DSC_0069-1.webp";
+const BLOGS_HERO = "/all/Firefly.webp";
 
 export default function BlogsPage() {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
-        <section className="relative w-full min-h-[min(72vh,40rem)] overflow-hidden border-b border-gray-200">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
+        <section className="relative w-full min-h-[min(88vh,46rem)] overflow-hidden border-b border-gray-200">
           <Image
             src={BLOGS_HERO}
-            alt="Forest hills and community landscape"
+            alt="Forest landscape from ICFG field work"
             fill
             preload
             sizes="100vw"
@@ -41,7 +41,7 @@ export default function BlogsPage() {
             aria-hidden
           />
           <div
-            className={`relative z-10 flex min-h-[min(72vh,40rem)] w-full flex-col justify-end pb-14 pt-28 ${sectionPad} md:pb-20 md:pt-32`}
+            className={`relative z-10 flex min-h-[min(88vh,46rem)] w-full flex-col justify-end pb-16 pt-28 ${sectionPad} md:pb-24 md:pt-36`}
           >
             <p
               className={`${instrumentSerif.className} text-[1.2rem] italic tracking-[-0.02em] text-white/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.85)] md:text-[1.35rem]`}

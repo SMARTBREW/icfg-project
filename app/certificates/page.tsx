@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "@/components/header";
 import SiteFooter from "@/components/site-footer";
 import { CERTIFICATES } from "@/constants/content";
+import { sectionPad } from "@/constants/layout";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
 
 export const metadata: Metadata = {
@@ -18,7 +19,6 @@ export const metadata: Metadata = {
   },
 };
 
-const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
 const CERT_HERO = "/about/DSC_0069-1.webp";
 
 const COMPLIANCE_TIMELINE = [
@@ -85,7 +85,7 @@ export default function CertificatesPage() {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
         <section className="relative w-full min-h-[min(72vh,40rem)] overflow-hidden border-b border-gray-200">
           <Image
             src={CERT_HERO}

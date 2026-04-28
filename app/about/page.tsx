@@ -15,7 +15,7 @@ import HoverCard from "@/components/hover-card";
 import Header from "@/components/header";
 import SiteFooter from "@/components/site-footer";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
-import { HERO_IMAGE } from "@/constants/icfg";
+import { sectionPad } from "@/constants/layout";
 
 export const metadata: Metadata = {
   title: "About us — Institute of Community Forest Governance",
@@ -28,7 +28,8 @@ export const metadata: Metadata = {
   },
 };
 
-const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
+const ABOUT_HERO_IMAGE = "/all/thumbnail%20(7).jpeg";
+
 
 const MILESTONES = [
   {
@@ -149,10 +150,10 @@ export default function AboutPage() {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
         <section className="relative w-full min-h-[min(88vh,46rem)] overflow-hidden border-b border-gray-200">
           <Image
-            src={HERO_IMAGE}
+            src={ABOUT_HERO_IMAGE}
             alt="Forest landscape central to community life and culture"
             fill
             preload
@@ -439,6 +440,51 @@ export default function AboutPage() {
                 </div>
               );
             })}
+          </div>
+        </section>
+
+        <section
+          id="about-gallery"
+          className={`border-t border-gray-200 bg-gray-50 py-14 md:py-20 ${sectionPad}`}
+        >
+          <h2
+            className={`${playfairDisplay.className} text-center text-[1.75rem] leading-tight text-black md:text-[2.1rem]`}
+          >
+            In the field
+          </h2>
+          <p className="mx-auto mt-5 max-w-3xl text-center font-['Inter'] text-[0.98rem] leading-[1.75rem] text-gray-700">
+            A few moments from trainings, boundary walks, and Gram Sabha visits.
+          </p>
+          <div className="mx-auto mt-10 grid w-full max-w-6xl gap-5 md:mt-12 md:grid-cols-3 md:gap-6">
+            {[
+              {
+                src: "/all/thumbnail%20(9).jpeg",
+                alt: "Community meeting in the field",
+              },
+              {
+                src: "/all/thumbnail%20(11).jpeg",
+                alt: "Forest work and community participation",
+              },
+              {
+                src: "/all/WhatsApp-Image-2024-02.webp",
+                alt: "Group activity during a field programme",
+              },
+            ].map((img) => (
+              <figure
+                key={img.src}
+                className="overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.05)]"
+              >
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                    className="object-cover object-center"
+                  />
+                </div>
+              </figure>
+            ))}
           </div>
         </section>
 

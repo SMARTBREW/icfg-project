@@ -64,7 +64,7 @@ export default function ImpactMetricCounter({ metric }: { metric: Metric }) {
   return (
     <div
       ref={ref}
-      className="flex flex-col items-center text-center md:items-start md:text-left"
+      className="mx-auto flex flex-col items-center text-center"
     >
       <p
         className={`${SatoshiBold.className} text-[3.25rem] leading-none tracking-[-0.06em] text-black tabular-nums md:text-[4.5rem]`}

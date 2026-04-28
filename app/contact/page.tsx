@@ -6,6 +6,7 @@ import ContactForm from "@/components/contact-form";
 import Header from "@/components/header";
 import SiteFooter from "@/components/site-footer";
 import { INSTITUTE_CONTACT } from "@/constants/institute-contact";
+import { sectionPad } from "@/constants/layout";
 import { instrumentSerif, playfairDisplay, SatoshiBold } from "@/constants";
 
 export const metadata: Metadata = {
@@ -19,8 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-const sectionPad = "mx-[2rem] md:mx-[4.5rem] md:px-[8vw]";
-const CONTACT_HERO = "/about/DSC05008-scaled.webp";
+const CONTACT_HERO = "/all/IMGsc.webp";
 
 const CONTACT_ROWS = [
   {
@@ -47,34 +47,42 @@ const CONTACT_ROWS = [
 
 const FAQS = [
   {
+    id: "hindi",
     q: "Can I write to you in Hindi?",
     a: "Yes, please do. We don’t have a Hindi version of the website yet — write to us in Hindi if it is easier, and we will reply in Hindi. Replies in Hindi can take a few days longer because they get drafted in the field, not the office.",
   },
   {
+    id: "80g",
     q: "Are donations to ICFG eligible for 80G tax benefits?",
     a: "Yes. ICFG is registered under sections 12A and 80G of the Income Tax Act. Indian taxpayers receive an 80G receipt against PAN, name, and address. The donate and certificates pages have the details.",
   },
   {
+    id: "foreign-donations",
     q: "Do you accept foreign donations?",
     a: "Only as permitted by Indian law and our governing documents. Please write to us before sending anything; we will tell you what is currently possible and what isn’t.",
   },
   {
+    id: "slow-replies",
     q: "Why do replies sometimes take weeks?",
     a: "From late June through August the team is in the villages for monsoon-season patrols and Sabha visits, and the office runs on a skeleton crew. We catch up by mid-September. Anything urgent — please mark it so in the subject line.",
   },
   {
+    id: "volunteer",
     q: "Can I volunteer with ICFG?",
     a: "We host a small number of placements each year. Field stints, translation, documentation, and research support are the most useful. Stays of three weeks or longer work better — anything shorter rarely gives you enough of the village rhythm.",
   },
   {
+    id: "outside-jharkhand",
     q: "Do you work outside Jharkhand?",
     a: "Most field work is in Jharkhand. We also support and learn from communities in Chhattisgarh, Odisha, and Maharashtra on FRA implementation and CFR claims.",
   },
   {
+    id: "research-visits",
     q: "Can students or researchers visit a village?",
     a: "Possibly, by community invitation and never as observers. Plan with us at least 4–6 weeks ahead, and expect a clear scope and a language plan before the visit.",
   },
   {
+    id: "partnerships",
     q: "How can my organisation partner with ICFG?",
     a: "Start with a short concept note describing the programme idea, the communities involved, and the consent and reporting expectations. Partnerships that compromise community consent — even unintentionally — are something we step back from.",
   },
@@ -84,11 +92,11 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col bg-gray-50 text-black">
-        <section className="relative w-full min-h-[min(56vh,32rem)] overflow-hidden border-b border-gray-200">
+      <main id="main-content" className="flex flex-1 flex-col bg-gray-50 text-black">
+        <section className="relative w-full min-h-[min(88vh,46rem)] overflow-hidden border-b border-gray-200">
           <Image
             src={CONTACT_HERO}
-            alt=""
+            alt="ICFG field visit and community work"
             fill
             preload
             sizes="100vw"
@@ -99,7 +107,7 @@ export default function ContactPage() {
             aria-hidden
           />
           <div
-            className={`relative z-10 flex min-h-[min(56vh,32rem)] w-full flex-col justify-end pb-12 pt-28 ${sectionPad} md:pb-16 md:pt-32`}
+            className={`relative z-10 flex min-h-[min(88vh,46rem)] w-full flex-col justify-end pb-16 pt-28 ${sectionPad} md:pb-24 md:pt-36`}
           >
             <p
               className={`${instrumentSerif.className} text-[1.2rem] italic tracking-[-0.02em] text-white/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.85)] md:text-[1.35rem]`}
@@ -109,7 +117,7 @@ export default function ContactPage() {
             <h1
               className={`${SatoshiBold.className} mt-4 text-[2.5rem] leading-[1.1] tracking-[-0.05em] text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.45)] md:text-[3.25rem] lg:text-[3.5rem]`}
             >
-              Contact
+              Contact Us
             </h1>
             <p
               className={`${playfairDisplay.className} mt-6 max-w-2xl text-[clamp(0.95rem,2.2vw,1.2rem)] leading-[1.5] tracking-[-0.02em] text-white/95 [text-shadow:0_1px_4px_rgba(0,0,0,0.85)]`}
@@ -129,69 +137,67 @@ export default function ContactPage() {
                 How to reach us
               </h2>
               <p className="mt-3 font-['Inter'] text-[0.95rem] leading-[1.7rem] text-gray-600">
-                We coordinate programmes from {INSTITUTE_CONTACT.region}. The
-                form is the most reliable way to reach the team; we also list
-                email and expectations below.
+                Use the form for enquiries, or reach us directly on the details
+                below.
               </p>
               <ul className="mt-8 space-y-4">
                 <li className="rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm">
-                  <p className="font-['Inter'] text-[0.7rem] font-[600] uppercase tracking-[0.18em] text-gray-500">
-                    Email
-                  </p>
-                  <a
-                    href={INSTITUTE_CONTACT.emailMailto}
-                    className="mt-2 inline-block font-['Inter'] text-[0.95rem] font-[500] text-[color:var(--icfg-forest)] underline-offset-2 hover:underline"
-                  >
-                    {INSTITUTE_CONTACT.emailDisplay}
-                  </a>
-                  <p className="mt-2 font-['Inter'] text-[0.85rem] leading-[1.5rem] text-gray-600">
-                    For general inquiries and institutional correspondence.
-                    Please avoid sharing sensitive personal data unrelated to
-                    your request.
-                  </p>
-                </li>
-                <li className="rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm">
-                  <p className="font-['Inter'] text-[0.7rem] font-[600] uppercase tracking-[0.18em] text-gray-500">
-                    Where to find us
-                  </p>
-                  <p className="mt-2 font-['Inter'] text-[0.95rem] leading-[1.6rem] text-gray-800">
-                    Office hours and the region we work from are mapped out{" "}
+                  <div>
+                    <p className="font-['Inter'] text-[0.7rem] font-[600] uppercase tracking-[0.18em] text-gray-500">
+                      Email
+                    </p>
                     <a
-                      href="#where-we-coordinate-from"
-                      className="font-[500] text-[color:var(--icfg-forest)] underline-offset-2 hover:underline"
+                      href={INSTITUTE_CONTACT.emailMailto}
+                      className="mt-2 inline-block font-['Inter'] text-[0.95rem] font-[500] text-[color:var(--icfg-forest)] underline-offset-2 hover:underline"
                     >
-                      below
+                      {INSTITUTE_CONTACT.emailDisplay}
                     </a>
-                    .
-                  </p>
+                  </div>
+                  <div className="mt-4 border-t border-gray-200 pt-4">
+                    <p className="font-['Inter'] text-[0.7rem] font-[600] uppercase tracking-[0.18em] text-gray-500">
+                      Address
+                    </p>
+                    <p className="mt-2 font-['Inter'] text-[0.95rem] leading-[1.6rem] text-gray-800">
+                      {INSTITUTE_CONTACT.address}
+                    </p>
+                  </div>
+                  <div className="mt-4 border-t border-gray-200 pt-4">
+                    <p className="font-['Inter'] text-[0.7rem] font-[600] uppercase tracking-[0.18em] text-gray-500">
+                      Phone
+                    </p>
+                    <p className="mt-2 font-['Inter'] text-[0.95rem] leading-[1.6rem] text-gray-800">
+                      {INSTITUTE_CONTACT.phones.join(" , ")}
+                    </p>
+                  </div>
                 </li>
               </ul>
 
               <div className="mt-8 rounded-2xl border border-[color:var(--icfg-forest)]/20 bg-[color:var(--icfg-forest)]/[0.06] p-5 md:p-6">
                 <p className="font-['Inter'] text-[0.85rem] font-[600] uppercase tracking-[0.12em] text-[color:var(--icfg-forest)]">
-                  Want to fund the work?
+                  Bank Details for Donations
                 </p>
-                <p className="mt-2 font-['Inter'] text-[0.9rem] leading-[1.55rem] text-gray-800">
-                  Online giving is being set up. Meanwhile you can start a donation
-                  conversation from the donate page.
-                </p>
-                <div className="mt-4">
-                  <Link
-                    href="/donate"
-                    className="icfg-btn-primary inline-flex rounded-2xl px-5 py-3 font-['Inter'] text-[0.9rem] font-[500] tracking-[-0.02em]"
-                  >
-                    Donate
-                  </Link>
-                </div>
-                <p className="mt-3 font-['Inter'] text-[0.8rem] text-gray-600">
-                  <Link
-                    href="/certificates"
-                    className="font-[500] text-[color:var(--icfg-forest)] underline-offset-2 hover:underline"
-                  >
-                    12A / 80G and reporting
-                  </Link>{" "}
-                  — summary for donors.
-                </p>
+                <dl className="mt-3 space-y-2 font-['Inter'] text-[0.9rem] leading-[1.55rem] text-gray-800">
+                  <div>
+                    <dt className="font-[600]">Account Holder:</dt>
+                    <dd>{INSTITUTE_CONTACT.bankDetails.accountHolder}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-[600]">Account number:</dt>
+                    <dd>{INSTITUTE_CONTACT.bankDetails.accountNumber}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-[600]">IFSC Code:</dt>
+                    <dd>{INSTITUTE_CONTACT.bankDetails.ifscCode}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-[600]">MICR code:</dt>
+                    <dd>{INSTITUTE_CONTACT.bankDetails.micrCode}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-[600]">UPI:</dt>
+                    <dd>{INSTITUTE_CONTACT.bankDetails.upi}</dd>
+                  </div>
+                </dl>
               </div>
             </div>
 
@@ -200,7 +206,7 @@ export default function ContactPage() {
                 <h2
                   className={`${playfairDisplay.className} text-[1.5rem] text-black md:text-[1.85rem]`}
                 >
-                  Send a message
+                  Get in Touch
                 </h2>
                 <p className="mt-3 font-['Inter'] text-[0.95rem] leading-[1.7rem] text-gray-600">
                   All fields marked * are required. We read every note; response
@@ -273,11 +279,8 @@ export default function ContactPage() {
                 {INSTITUTE_CONTACT.region}
               </h2>
               <p className="mt-4 font-['Inter'] text-[0.95rem] leading-[1.7rem] text-gray-700">
-                Most field work is in and around Jharkhand. Coordinators travel
-                to hearings, trainings, and Gram Sabhas across roughly{" "}
-                <strong className="font-[600] text-black">10 districts</strong>
-                ; the office handles documentation, partnerships, and donor
-                correspondence in between trips.
+                Institute of Community Forest Governance, 2nd Floor, Simdega
+                Bhawan, Purulia Road, Kantatoli, Ranchi.
               </p>
               <ul className="mt-6 space-y-4">
                 <li className="rounded-2xl border border-gray-200/80 bg-gray-50 p-5">
@@ -298,8 +301,7 @@ export default function ContactPage() {
                 </li>
               </ul>
               <p className="mt-6 font-['Inter'] text-[0.85rem] leading-[1.55rem] text-gray-500">
-                Need an exact address for courier or in-person visits? Please
-                ask via the form—we share it on a per-visit basis.
+                Phone: {INSTITUTE_CONTACT.phones.join(" , ")}
               </p>
             </div>
           </div>
@@ -359,8 +361,8 @@ export default function ContactPage() {
               Questions we get often
             </h2>
             <ul className="mt-10 divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-              {FAQS.map((item, i) => (
-                <li key={i}>
+              {FAQS.map((item) => (
+                <li key={item.id}>
                   <details className="group">
                     <summary className="flex cursor-pointer list-none items-start justify-between gap-6 px-6 py-5 transition hover:bg-gray-50 md:px-7">
                       <span className="font-['Inter'] text-[0.98rem] font-[600] tracking-[-0.01em] text-black md:text-[1rem]">
