@@ -32,7 +32,7 @@ export default function SiteFooter() {
             >
               <span className="footer-logo-panel">
                 <Image
-                  src="/hero/icfg-logo.webp"
+                  src="/hero/WhatsApp%20Image%202026-04-28%20at%204.20.11%20PM.jpeg"
                   alt="Institute of Community Forest Governance"
                   width={400}
                   height={90}

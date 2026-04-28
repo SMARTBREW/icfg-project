@@ -59,14 +59,14 @@ export default function Header() {
       <div className="mx-[2rem] flex max-w-[90rem] flex-wrap items-center justify-between gap-6 py-4 md:mx-[4.5rem] md:px-[8vw]">
         <Link
           href="/"
-          className="flex max-w-[min(100%,18rem)] items-center md:max-w-[22rem]"
+          className="flex items-center"
         >
           <Image
-            src="/hero/icfg-logo.webp"
+            src="/hero/WhatsApp%20Image%202026-04-28%20at%204.20.11%20PM.jpeg"
             alt="Institute of Community Forest Governance"
-            width={320}
-            height={72}
-            className="icfg-header-logo h-11 w-auto object-contain object-left md:h-[3.25rem]"
+            width={160}
+            height={160}
+            className="icfg-header-logo h-14 w-14 object-contain object-left md:h-16 md:w-16"
             preload
           />
         </Link>

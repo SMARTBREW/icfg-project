@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "ICFG — Institute of Community Forest Governance",
     description:
       "Forest rights, community stewardship, and dignified livelihoods across India.",
-    images: ["/hero/icfg-logo.webp"],
+    images: ["/hero/WhatsApp%20Image%202026-04-28%20at%204.20.11%20PM.jpeg"],
   },
   twitter: {
     card: "summary_large_image",
